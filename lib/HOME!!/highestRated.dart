@@ -74,7 +74,6 @@ class HighestRatedsk extends StatelessWidget {
                 ),
 
               )),
-
         ],
       ),
       bottomNavigationBar: Container(
@@ -97,7 +96,6 @@ class HighestRatedsk extends StatelessWidget {
              Container(
                decoration: BoxDecoration(
                  //borderRadius: BorderRadius.circular(Dimensions.radius30),
-
 
                ),
              )
