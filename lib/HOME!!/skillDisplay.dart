@@ -211,7 +211,39 @@ class _SkilldsipState extends State<Skilldsip> {
               ),
               child: Container(
                 padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
-                child: AppColumn(text: "Name of the user.",),
+                child:Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Smalltext(text:"Name:"),
+                    SizedBox(height: Dimensions.height10),
+                    Row(
+                      children: [
+                        Wrap(
+                          children: List.generate(5,
+                                (index) => const Icon(
+                              Icons.star,
+                              color: Colors.black,
+                              size: 15,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Smalltext(text: "5"),
+                        const SizedBox(width: 10),
+                        Smalltext(text: "(rating)"),
+                      ],
+                    ),
+                    SizedBox(height: Dimensions.height20),
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Iconandtext(icon: Icons.message_rounded, iconColor: Colors.black),
+                        Iconandtext(icon: Icons.location_on_rounded, iconColor: Colors.black),
+                        Iconandtext(icon: Icons.add_business_rounded, iconColor: Colors.black),
+                      ],
+                    ),
+                  ],
+                )
               ),
             ),
           ),

@@ -3,10 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:skillex/imp/matter.dart';
 import 'package:skillex/widgets/expandable_text.dart';
-import 'package:skillex/widgets/largeText.dart';
 import '../imp/dimensions.dart';
-import '../widgets/appIcon.dart';
-import '../widgets/iconsImages.dart';
 import '../widgets/smallText.dart';
 
 class HighestRatedsk extends StatelessWidget {
