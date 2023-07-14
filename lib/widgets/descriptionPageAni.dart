@@ -9,9 +9,6 @@ class DescriptionPageAni extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            flexibleSpace: FlexibleSpaceBar(
-              background://uploads image from the database. ,
-            ),
           )
         ],
       ),

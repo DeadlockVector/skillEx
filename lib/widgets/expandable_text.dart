@@ -18,7 +18,7 @@ class _ExpTextState extends State<ExpText> {
 
   bool hiddenText= true;
 
-  double textHeight= Dimensions.screenHeight/5.63;
+  double textHeight= 130;
 
   @override
   void initState(){
@@ -36,7 +36,7 @@ class _ExpTextState extends State<ExpText> {
     return Container(
       child: secondHalf.isEmpty?Smalltext(text: firstHalf):Column(
         children: [
-          Smalltext(text: hiddenText?(firstHalf+"..."):(firstHalf+secondHalf)),
+          Smalltext(height:1.8,size:Dimensions.font16,text: hiddenText?(firstHalf+"..."):(firstHalf+secondHalf)),
           InkWell(
             onTap: (){
               setState(() {

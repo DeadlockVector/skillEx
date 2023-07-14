@@ -4,14 +4,15 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="52598abe-d0d7-4996-8298-578c134288e7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../lib/HOME!!/highestRated.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../lib/pop-up/pop.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../lib/widgets/appIcon.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/imp/dimensions.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/imp/dimensions.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/main.dart" afterDir="false" />
+    <list default="true" id="61e50d21-d64e-4c11-8e95-464e3589618a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/../.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/HOME!!/highestRated.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/HOME!!/highestRated.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../lib/widgets/descriptionPageAni.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/widgets/descriptionPageAni.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,29 +22,29 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectId" id="2SHiQT6E8OgC3fnEfioR5Tn16la" />
+  <component name="ProjectId" id="2SWN3Em86RxrLjDUOVqGMXTt2AV" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;android.gradle.sync.needed&quot;: &quot;true&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "android.gradle.sync.needed": "true",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "show.migrate.to.gradle.popup": "false"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="52598abe-d0d7-4996-8298-578c134288e7" name="Changes" comment="" />
-      <created>1688809891050</created>
+      <changelist id="61e50d21-d64e-4c11-8e95-464e3589618a" name="Changes" comment="" />
+      <created>1689258175476</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1688809891050</updated>
+      <updated>1689258175476</updated>
     </task>
     <servers />
   </component>

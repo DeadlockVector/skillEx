@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:skillex/imp/matter.dart';
 import 'package:skillex/widgets/expandable_text.dart';
+import 'package:skillex/widgets/largeText.dart';
 import '../imp/dimensions.dart';
 import '../widgets/appIcon.dart';
 import '../widgets/iconsImages.dart';
@@ -72,38 +73,40 @@ class HighestRatedsk extends StatelessWidget {
 
                   ],
                 ),
-
               )),
         ],
       ),
       bottomNavigationBar: Container(
         height: 120,
-        padding: EdgeInsets.only(
-            top: Dimensions.height20,
-            bottom: Dimensions.height20,
-            left: Dimensions.width20,
-            right: Dimensions.width20),
-        decoration:
-        BoxDecoration(
-            color: Colors.black,
-            borderRadius:
-            BorderRadius.only(
-                topLeft: Radius.circular(Dimensions.radius30),
-                topRight: Radius.circular(Dimensions.radius30),
-            )),
+        padding: EdgeInsets.only(top: Dimensions.height20,bottom: Dimensions.height20, left: Dimensions.width20, right: Dimensions.width20),
+        decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.only(
+                  topRight:Radius.circular(Dimensions.radius40),
+                  topLeft: Radius.circular(Dimensions.radius40)
+          ),
+        ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-             Container(
-               decoration: BoxDecoration(
-                 //borderRadius: BorderRadius.circular(Dimensions.radius30),
-
-               ),
-             )
+            Container(
+              padding: EdgeInsets.only(top: Dimensions.height15, bottom: Dimensions.height15,left: Dimensions.width20,right: Dimensions.width20),
+              child:Smalltext(text: "Status",),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimensions.radius40/2),
+                color: Colors.white,
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(top: Dimensions.height15, bottom: Dimensions.height15,left: Dimensions.width20,right: Dimensions.width20),
+              child: Smalltext(text: "Bookmark",),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimensions.radius40/2),
+                color: Colors.white,
+              ),
+            )
           ],
         ),
-
-
-
       ),
     );
   }

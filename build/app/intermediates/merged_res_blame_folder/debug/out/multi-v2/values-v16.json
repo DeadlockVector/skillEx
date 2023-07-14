@@ -4,7 +4,7 @@
             "outputFile": "com.example.skillex.app-mergeDebugResources-14:/values-v16/values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Aaditya Krishna\\.gradle\\caches\\transforms-3\\5c8a81cf2eef89498ff1a72fe119bcdb\\transformed\\core-1.6.0\\res\\values-v16\\values-v16.xml",
+                    "source": "/home/akella_saket/.gradle/caches/transforms-3/5c8a81cf2eef89498ff1a72fe119bcdb/transformed/core-1.6.0/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
