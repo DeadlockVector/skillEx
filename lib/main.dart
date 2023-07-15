@@ -10,7 +10,6 @@ void main() {
 }
 class Skillex extends StatelessWidget {
   const Skillex({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return const GetMaterialApp(

@@ -1,10 +1,13 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:skillex/HOME!!/highestRated.dart';
 import 'package:skillex/imp/dimensions.dart';
 import 'package:skillex/imp/matter.dart';
+import 'package:skillex/screens/chat_page.dart';
 import 'package:skillex/widgets/iconsImages.dart';
 import 'package:skillex/widgets/largeText.dart';
 import 'package:skillex/widgets/smallText.dart';
+import 'package:skillex/widgets/widgets.dart';
 
 class Skilldsip extends StatefulWidget {
   const Skilldsip({Key? key}) : super(key: key);
@@ -95,7 +98,7 @@ class _SkilldsipState extends State<Skilldsip> {
                     Container(
                       // image size if required!
                       width:Dimensions.listViewImgSize,
-                      height :120,
+                      height :150,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(Dimensions.radius30),
                         color: Colors.black,
@@ -103,7 +106,7 @@ class _SkilldsipState extends State<Skilldsip> {
                     ),
                     Expanded(
                       child: Container(
-                        height:100,
+                        height:130,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(
                             topRight: Radius.circular(Dimensions.radius30),
@@ -124,12 +127,47 @@ class _SkilldsipState extends State<Skilldsip> {
                               Largetext(text: "Profession: "),
                               const Padding(padding: EdgeInsets.only(top:12.0)),
                               // icons.
-                              const Row(
+                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
-                                  Iconandtext(icon: Icons.message_rounded, iconColor: Colors.black),
-                                  Iconandtext(icon: Icons.location_on_rounded, iconColor: Colors.black),
-                                  Iconandtext(icon: Icons.add_business_rounded, iconColor: Colors.black),
+                                  FloatingActionButton.extended(
+                                      label: const Text(''), // <-- Text
+                                      backgroundColor: Colors.black,
+                                      icon: const Icon( // <-- Icon
+                                        Icons.message_rounded,
+                                        color:Colors.white,
+                                      ),
+                                      
+                                      onPressed: () {
+                                        nextScreen(context, const ChatPage());
+                                      },
+                                    ),
+                                      FloatingActionButton.extended(
+                                      label: const Text(''), // <-- Text
+                                      backgroundColor: Colors.black,
+                                      icon: const Icon( // <-- Icon
+                                        Icons.location_on_rounded,
+                                        color:Colors.white,
+                                      ),
+                                      
+                                      onPressed: () {
+                                        
+                                      },
+                                    ),
+                                   FloatingActionButton.extended(
+                                      label: const Text(''), // <-- Text
+                                      backgroundColor: Colors.black,
+                                      icon: const Icon( // <-- Icon
+                                        Icons.add_business_rounded,
+                                        color:Colors.white,
+                                      ),
+                                      
+                                      onPressed: () {
+                                        nextScreen(context, const ChatPage());
+                                      },
+                                    ),  
+
+                                  
                                 ],
                               ),
                             ],
@@ -165,90 +203,97 @@ class _SkilldsipState extends State<Skilldsip> {
       matrix = Matrix4.diagonal3Values(1, currScale, 1)..setTranslationRaw(0, _height * (1 - _scaleFactor) / 2, 1);
     }
 
-    return Transform(
-      transform: matrix,
-      child: Stack(
-        children: [
-          Container(
-            height: Dimensions.pageViewContainer,
-            margin: EdgeInsets.symmetric(horizontal: Dimensions.width10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimensions.radius40),
-              color: Colors.black,
-            ),
-            child: const Center(
-              child: Text(
-                'USER\'S SKILLS AND QUALIFICATIONS!!',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
+return GestureDetector(
+  onTap: () {
+    nextScreen(context, const HighestRatedsk());
+  },
+  child: Transform(
+    transform: matrix,
+    child: Stack(
+      children: [
+        Container(
+          height: Dimensions.pageViewContainer,
+          margin: EdgeInsets.symmetric(horizontal: Dimensions.width10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(Dimensions.radius40),
+            color: Colors.black,
+          ),
+          child: const Center(
+            child: Text(
+              'USER\'S SKILLS AND QUALIFICATIONS!!',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            height: Dimensions.pageViewTextContainer,
+            margin: EdgeInsets.fromLTRB(
+              Dimensions.width40,
+              0,
+              Dimensions.width40,
+              Dimensions.width40,
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(Dimensions.radius30),
+              color: Colors.grey,
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black,
+                  blurRadius: 5.0,
+                  offset: Offset(0, 7),
+                ),
+              ],
+            ),
             child: Container(
-              height: Dimensions.pageViewTextContainer,
-              margin: EdgeInsets.fromLTRB(
-                Dimensions.width40,
-                0,
-                Dimensions.width40,
-                Dimensions.width40,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Dimensions.radius30),
-                color: Colors.grey,
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black,
-                    blurRadius: 5.0,
-                    offset: Offset(0, 7),
+              padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Smalltext(text: "Name:"),
+                  SizedBox(height: Dimensions.height10),
+                  Row(
+                    children: [
+                      Wrap(
+                        children: List.generate(
+                          5,
+                          (index) => const Icon(
+                            Icons.star,
+                            color: Colors.black,
+                            size: 15,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Smalltext(text: "5"),
+                      const SizedBox(width: 10),
+                      Smalltext(text: "(rating)"),
+                    ],
+                  ),
+                  SizedBox(height: Dimensions.height20),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Iconandtext(icon: Icons.message_rounded, iconColor: Colors.black),
+                      Iconandtext(icon: Icons.location_on_rounded, iconColor: Colors.black),
+                      Iconandtext(icon: Icons.add_business_rounded, iconColor: Colors.black),
+                    ],
                   ),
                 ],
               ),
-              child: Container(
-                padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
-                child:Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Smalltext(text:"Name:"),
-                    SizedBox(height: Dimensions.height10),
-                    Row(
-                      children: [
-                        Wrap(
-                          children: List.generate(5,
-                                (index) => const Icon(
-                              Icons.star,
-                              color: Colors.black,
-                              size: 15,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        Smalltext(text: "5"),
-                        const SizedBox(width: 10),
-                        Smalltext(text: "(rating)"),
-                      ],
-                    ),
-                    SizedBox(height: Dimensions.height20),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Iconandtext(icon: Icons.message_rounded, iconColor: Colors.black),
-                        Iconandtext(icon: Icons.location_on_rounded, iconColor: Colors.black),
-                        Iconandtext(icon: Icons.add_business_rounded, iconColor: Colors.black),
-                      ],
-                    ),
-                  ],
-                )
-              ),
             ),
           ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  ),
+);
+
+}
 }
