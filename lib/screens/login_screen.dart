@@ -55,162 +55,164 @@ class _LoginScreenState extends State<LoginScreen> {
           backgroundColor: const Color.fromARGB(255, 0, 0, 0),
           title: const Text('Skill-Ex'),
         ),
-        body: FutureBuilder(
-          future: _initializeFirebase(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return Padding(
-                padding:
-                    const EdgeInsets.only(left: 24.0, right: 24.0, top: 48),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const Icon(Icons.lock, size: 100),
-                    const Padding(
-                      padding: EdgeInsets.only(bottom: 75.0, top: 42),
-                      child: Text('Locked!',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 40,
-                          )),
-                    ),
-                    Form(
-                      key: _formKey,
-                      child: Column(
-                        children: <Widget>[
-                          TextFormField(
-                            controller: _emailTextController,
-                            focusNode: _focusEmail,
-                            validator: (value) => Validator.validateEmail(
-                              email: value,
-                            ),
-                            decoration: InputDecoration(
-                              icon: const Icon(
-                                Icons.email_rounded,
-                                color: Colors.black,
-                              ),
-                              hintText: "Email",
-                              errorBorder: UnderlineInputBorder(
-                                borderRadius: BorderRadius.circular(6.0),
-                                borderSide: const BorderSide(
-                                  color: Color.fromARGB(255, 0, 0, 0),
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 8.0),
-                          TextFormField(
-                            controller: _passwordTextController,
-                            focusNode: _focusPassword,
-                            obscureText: true,
-                            validator: (value) => Validator.validatePassword(
-                              password: value,
-                            ),
-                            decoration: InputDecoration(
-                              icon: const Icon(
-                                Icons.remove_red_eye_rounded,
-                                color: Colors.black,
-                              ),
-                              hintText: "Password",
-                              errorBorder: UnderlineInputBorder(
-                                borderRadius: BorderRadius.circular(6.0),
-                                borderSide: const BorderSide(
-                                  color: Color.fromARGB(255, 0, 0, 0),
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 144.0),
-                          _isProcessing
-                              ? const CircularProgressIndicator()
-                              : Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                      child: ElevatedButton(
-                                        onPressed: () async {
-                                          _focusEmail.unfocus();
-                                          _focusPassword.unfocus();
-
-                                          if (_formKey.currentState!
-                                              .validate()) {
-                                            setState(() {
-                                              _isProcessing = true;
-                                            });
-
-                                            User? user =
-                                                await FirebaseAuthHelper
-                                                    .signInUsingEmailPassword(
-                                              email: _emailTextController.text,
-                                              password:
-                                                  _passwordTextController.text,
-                                            );
-
-                                            setState(() {
-                                              _isProcessing = false;
-                                            });
-
-                                            if (user != null) {
-                                              Navigator.of(context)
-                                                  .pushReplacement(
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      HomeScreen(user: user),
-                                                ),
-                                              );
-                                            }
-                                          }
-                                        },
-                                        style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all(
-                                                  const Color.fromARGB(
-                                                      255, 0, 0, 0)),
-                                        ),
-                                        child: const Text(
-                                          'Sign In',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 24.0),
-                                    Expanded(
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const SignUpScreen(),
-                                            ),
-                                          );
-                                        },
-                                        style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.all(
-                                                  const Color.fromARGB(
-                                                      255, 0, 0, 0)),
-                                        ),
-                                        child: const Text(
-                                          'SignUp',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                )
-                        ],
+        body: SingleChildScrollView(
+          child: FutureBuilder(
+            future: _initializeFirebase(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return Padding(
+                  padding:
+                      const EdgeInsets.only(left: 24.0, right: 24.0, top: 48),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const Icon(Icons.lock, size: 100),
+                      const Padding(
+                        padding: EdgeInsets.only(bottom: 75.0, top: 42),
+                        child: Text('Locked!',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 40,
+                            )),
                       ),
-                    )
-                  ],
-                ),
+                      Form(
+                        key: _formKey,
+                        child: Column(
+                          children: <Widget>[
+                            TextFormField(
+                              controller: _emailTextController,
+                              focusNode: _focusEmail,
+                              validator: (value) => Validator.validateEmail(
+                                email: value,
+                              ),
+                              decoration: InputDecoration(
+                                icon: const Icon(
+                                  Icons.email_rounded,
+                                  color: Colors.black,
+                                ),
+                                hintText: "Email",
+                                errorBorder: UnderlineInputBorder(
+                                  borderRadius: BorderRadius.circular(6.0),
+                                  borderSide: const BorderSide(
+                                    color: Color.fromARGB(255, 0, 0, 0),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 8.0),
+                            TextFormField(
+                              controller: _passwordTextController,
+                              focusNode: _focusPassword,
+                              obscureText: true,
+                              validator: (value) => Validator.validatePassword(
+                                password: value,
+                              ),
+                              decoration: InputDecoration(
+                                icon: const Icon(
+                                  Icons.remove_red_eye_rounded,
+                                  color: Colors.black,
+                                ),
+                                hintText: "Password",
+                                errorBorder: UnderlineInputBorder(
+                                  borderRadius: BorderRadius.circular(6.0),
+                                  borderSide: const BorderSide(
+                                    color: Color.fromARGB(255, 0, 0, 0),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 144.0),
+                            _isProcessing
+                                ? const CircularProgressIndicator()
+                                : Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: ElevatedButton(
+                                          onPressed: () async {
+                                            _focusEmail.unfocus();
+                                            _focusPassword.unfocus();
+        
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              setState(() {
+                                                _isProcessing = true;
+                                              });
+        
+                                              User? user =
+                                                  await FirebaseAuthHelper
+                                                      .signInUsingEmailPassword(
+                                                email: _emailTextController.text,
+                                                password:
+                                                    _passwordTextController.text,
+                                              );
+        
+                                              setState(() {
+                                                _isProcessing = false;
+                                              });
+        
+                                              if (user != null) {
+                                                Navigator.of(context)
+                                                    .pushReplacement(
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        HomeScreen(user: user),
+                                                  ),
+                                                );
+                                              }
+                                            }
+                                          },
+                                          style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStateProperty.all(
+                                                    const Color.fromARGB(
+                                                        255, 0, 0, 0)),
+                                          ),
+                                          child: const Text(
+                                            'Sign In',
+                                            style: TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 24.0),
+                                      Expanded(
+                                        child: ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const SignUpScreen(),
+                                              ),
+                                            );
+                                          },
+                                          style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStateProperty.all(
+                                                    const Color.fromARGB(
+                                                        255, 0, 0, 0)),
+                                          ),
+                                          child: const Text(
+                                            'SignUp',
+                                            style: TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              }
+        
+              return const Center(
+                child: CircularProgressIndicator(),
               );
-            }
-
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          },
+            },
+          ),
         ),
       ),
     );

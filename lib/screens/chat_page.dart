@@ -25,7 +25,7 @@ class _ChatPageState extends State<ChatPage> {
           Expanded(
             child: ListView(
               children: [
-                // Add your chat messages widgets here
+
               ],
             ),
           ),

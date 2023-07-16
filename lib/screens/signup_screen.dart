@@ -55,241 +55,243 @@ class _SignUpScreenState extends State<SignUpScreen> {
           title: const Text('Create Account'),
           centerTitle: true,
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Form(
-                  key: _registerFormKey,
-                  child: Column(
-                    children: <Widget>[
-                      const Icon(Icons.person_pin_circle_rounded, size: 175),
-                      const SizedBox(height: 12.0),
-                      // name of the user
-                      TextFormField(
-                        controller: _nameTextController,
-                        focusNode: _focusName,
-                        decoration: InputDecoration(
-                          icon: const Icon(
-                            Icons.person,
-                            color: Colors.black,
-                          ),
-                          hintText: "Name",
-                          errorBorder: UnderlineInputBorder(
-                            borderRadius: BorderRadius.circular(6.0),
-                            borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 0, 0, 0),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Form(
+                    key: _registerFormKey,
+                    child: Column(
+                      children: <Widget>[
+                        const Icon(Icons.person_pin_circle_rounded, size: 175),
+                        const SizedBox(height: 12.0),
+                        // name of the user
+                        TextFormField(
+                          controller: _nameTextController,
+                          focusNode: _focusName,
+                          decoration: InputDecoration(
+                            icon: const Icon(
+                              Icons.person,
+                              color: Colors.black,
+                            ),
+                            hintText: "Name",
+                            errorBorder: UnderlineInputBorder(
+                              borderRadius: BorderRadius.circular(6.0),
+                              borderSide: const BorderSide(
+                                color: Color.fromARGB(255, 0, 0, 0),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 12.0),
-
-                      // age of the user
-                      TextFormField(
-                        controller: _ageTextController,
-                        focusNode: _focusAge,
-                        decoration: InputDecoration(
-                          icon: const Icon(
-                            Icons.calendar_month,
-                            color: Colors.black,
-                          ),
-                          hintText: "Age",
-                          errorBorder: UnderlineInputBorder(
-                            borderRadius: BorderRadius.circular(6.0),
-                            borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 0, 0, 0),
+                        const SizedBox(height: 12.0),
+        
+                        // age of the user
+                        TextFormField(
+                          controller: _ageTextController,
+                          focusNode: _focusAge,
+                          decoration: InputDecoration(
+                            icon: const Icon(
+                              Icons.calendar_month,
+                              color: Colors.black,
+                            ),
+                            hintText: "Age",
+                            errorBorder: UnderlineInputBorder(
+                              borderRadius: BorderRadius.circular(6.0),
+                              borderSide: const BorderSide(
+                                color: Color.fromARGB(255, 0, 0, 0),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 12.0),
-
-                      // phone number of the user
-                      TextFormField(
-                        controller: _phoneNumberTextController,
-                        focusNode: _focusPhoneNum,
-                        decoration: InputDecoration(
-                          icon: const Icon(Icons.phone_android,
-                              color: Colors.black),
-                          hintText: "Phone number",
-                          errorBorder: UnderlineInputBorder(
-                            borderRadius: BorderRadius.circular(6.0),
-                            borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 0, 0, 0),
+                        const SizedBox(height: 12.0),
+        
+                        // phone number of the user
+                        TextFormField(
+                          controller: _phoneNumberTextController,
+                          focusNode: _focusPhoneNum,
+                          decoration: InputDecoration(
+                            icon: const Icon(Icons.phone_android,
+                                color: Colors.black),
+                            hintText: "Phone number",
+                            errorBorder: UnderlineInputBorder(
+                              borderRadius: BorderRadius.circular(6.0),
+                              borderSide: const BorderSide(
+                                color: Color.fromARGB(255, 0, 0, 0),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 12.0),
-
-                      TextFormField(
-                        controller: _emailTextController,
-                        focusNode: _focusEmail,
-                        validator: (value) => Validator.validateEmail(
-                          email: value,
-                        ),
-                        decoration: InputDecoration(
-                          icon: const Icon(
-                            Icons.email,
-                            color: Colors.black,
+                        const SizedBox(height: 12.0),
+        
+                        TextFormField(
+                          controller: _emailTextController,
+                          focusNode: _focusEmail,
+                          validator: (value) => Validator.validateEmail(
+                            email: value,
                           ),
-                          hintText: "Email",
-                          errorBorder: UnderlineInputBorder(
-                            borderRadius: BorderRadius.circular(6.0),
-                            borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 0, 0, 0),
+                          decoration: InputDecoration(
+                            icon: const Icon(
+                              Icons.email,
+                              color: Colors.black,
+                            ),
+                            hintText: "Email",
+                            errorBorder: UnderlineInputBorder(
+                              borderRadius: BorderRadius.circular(6.0),
+                              borderSide: const BorderSide(
+                                color: Color.fromARGB(255, 0, 0, 0),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 12.0),
-                      TextFormField(
-                        controller: _passwordTextController,
-                        focusNode: _focusPassword,
-                        obscureText: true,
-                        validator: (value) => Validator.validatePassword(
-                          password: value,
-                        ),
-                        decoration: InputDecoration(
-                          icon: const Icon(
-                            Icons.remove_red_eye,
-                            color: Colors.black,
+                        const SizedBox(height: 12.0),
+                        TextFormField(
+                          controller: _passwordTextController,
+                          focusNode: _focusPassword,
+                          obscureText: true,
+                          validator: (value) => Validator.validatePassword(
+                            password: value,
                           ),
-                          hintText: "Password",
-                          errorBorder: UnderlineInputBorder(
-                            borderRadius: BorderRadius.circular(6.0),
-                            borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 0, 0, 0),
+                          decoration: InputDecoration(
+                            icon: const Icon(
+                              Icons.remove_red_eye,
+                              color: Colors.black,
+                            ),
+                            hintText: "Password",
+                            errorBorder: UnderlineInputBorder(
+                              borderRadius: BorderRadius.circular(6.0),
+                              borderSide: const BorderSide(
+                                color: Color.fromARGB(255, 0, 0, 0),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 12.0),
-                      TextFormField(
-                        controller: _lifePhaseTextController,
-                        focusNode: _focuslifePhase,
-                        validator: (value) => Validator.validatelifePhase(
-                          lifePhase: value,
-                        ),
-                        decoration: InputDecoration(
-                          icon: const Icon(
-                            Icons.school_sharp,
-                            color: Colors.black,
+                        const SizedBox(height: 12.0),
+                        TextFormField(
+                          controller: _lifePhaseTextController,
+                          focusNode: _focuslifePhase,
+                          validator: (value) => Validator.validatelifePhase(
+                            lifePhase: value,
                           ),
-                          hintText: "Student/Working",
-                          errorBorder: UnderlineInputBorder(
-                            borderRadius: BorderRadius.circular(6.0),
-                            borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 0, 0, 0),
+                          decoration: InputDecoration(
+                            icon: const Icon(
+                              Icons.school_sharp,
+                              color: Colors.black,
+                            ),
+                            hintText: "Student/Working",
+                            errorBorder: UnderlineInputBorder(
+                              borderRadius: BorderRadius.circular(6.0),
+                              borderSide: const BorderSide(
+                                color: Color.fromARGB(255, 0, 0, 0),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 60.0),
-
-                      _isProcessing
-                          ? const CircularProgressIndicator()
-                          : Row(
-                              children: [
-                                Expanded(
-                                  child: ElevatedButton(
-                                    onPressed: () async {
-                                      setState(() {
-                                        _isProcessing = true;
-                                      });
-
-                                      if (_registerFormKey.currentState!
-                                          .validate()) {
-                                        User? user = await FirebaseAuthHelper
-                                            .registerUsingEmailPassword(
-                                          email:
-                                              _emailTextController.text.trim(),
-                                          password: _passwordTextController.text
-                                              .trim(),
-                                          name: _nameTextController.text.trim(),
-                                          lifePhase: _lifePhaseTextController
-                                              .text
-                                              .trim(),
-                                          age: int.parse(
-                                              _ageTextController.text.trim()),
-                                          phoneNumber: int.parse(
-                                              _phoneNumberTextController.text
-                                                  .trim()),
-                                        );
-
+                        const SizedBox(height: 60.0),
+        
+                        _isProcessing
+                            ? const CircularProgressIndicator()
+                            : Row(
+                                children: [
+                                  Expanded(
+                                    child: ElevatedButton(
+                                      onPressed: () async {
                                         setState(() {
-                                          _isProcessing = false;
+                                          _isProcessing = true;
                                         });
-
-                                        if (user != null) {
-                                          if (_lifePhaseTextController.text
-                                                  .toLowerCase() ==
-                                              "student") {
-                                            print(_lifePhaseTextController.text
-                                                .toLowerCase());
-                                            Navigator.of(context)
-                                                .pushAndRemoveUntil(
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    StudentProfileScreen(),
-                                              ),
-                                              ModalRoute.withName('/'),
-                                            );
-                                          } else if (_lifePhaseTextController
-                                                  .text
-                                                  .toLowerCase() ==
-                                              "working") {
-                                            print(_lifePhaseTextController.text
-                                                .toLowerCase());
-                                            Navigator.of(context)
-                                                .pushAndRemoveUntil(
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    WorkingProfileScreen(),
-                                              ),
-                                              ModalRoute.withName('/'),
-                                            );
-                                          }
-
-                                          // to revert back, remove everything under the nested if, including the nested if
-                                          /*
-                                          Navigator.of(context)
-                                              .pushAndRemoveUntil(
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  HomeScreen(user: user),
-                                            ),
-                                            ModalRoute.withName('/'),
+        
+                                        if (_registerFormKey.currentState!
+                                            .validate()) {
+                                          User? user = await FirebaseAuthHelper
+                                              .registerUsingEmailPassword(
+                                            email:
+                                                _emailTextController.text.trim(),
+                                            password: _passwordTextController.text
+                                                .trim(),
+                                            name: _nameTextController.text.trim(),
+                                            lifePhase: _lifePhaseTextController
+                                                .text
+                                                .trim(),
+                                            age: int.parse(
+                                                _ageTextController.text.trim()),
+                                            phoneNumber: int.parse(
+                                                _phoneNumberTextController.text
+                                                    .trim()),
                                           );
-                                          */
+        
+                                          setState(() {
+                                            _isProcessing = false;
+                                          });
+        
+                                          if (user != null) {
+                                            if (_lifePhaseTextController.text
+                                                    .toLowerCase() ==
+                                                "student") {
+                                              print(_lifePhaseTextController.text
+                                                  .toLowerCase());
+                                              Navigator.of(context)
+                                                  .pushAndRemoveUntil(
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      StudentProfileScreen(),
+                                                ),
+                                                ModalRoute.withName('/'),
+                                              );
+                                            } else if (_lifePhaseTextController
+                                                    .text
+                                                    .toLowerCase() ==
+                                                "working") {
+                                              print(_lifePhaseTextController.text
+                                                  .toLowerCase());
+                                              Navigator.of(context)
+                                                  .pushAndRemoveUntil(
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      WorkingProfileScreen(),
+                                                ),
+                                                ModalRoute.withName('/'),
+                                              );
+                                            }
+        
+                                            // to revert back, remove everything under the nested if, including the nested if
+                                            /*
+                                            Navigator.of(context)
+                                                .pushAndRemoveUntil(
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    HomeScreen(user: user),
+                                              ),
+                                              ModalRoute.withName('/'),
+                                            );
+                                            */
+                                          }
+                                        } else {
+                                          setState(() {
+                                            _isProcessing = false;
+                                          });
                                         }
-                                      } else {
-                                        setState(() {
-                                          _isProcessing = false;
-                                        });
-                                      }
-                                    },
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              const Color.fromARGB(
-                                                  255, 0, 0, 0)),
-                                    ),
-                                    child: const Text(
-                                      'Sign up',
-                                      style: TextStyle(color: Colors.white),
+                                      },
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                const Color.fromARGB(
+                                                    255, 0, 0, 0)),
+                                      ),
+                                      child: const Text(
+                                        'Sign up',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            )
-                    ],
-                  ),
-                )
-              ],
+                                ],
+                              )
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
