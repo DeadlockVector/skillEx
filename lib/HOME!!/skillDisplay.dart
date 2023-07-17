@@ -131,11 +131,12 @@ class _SkilldsipState extends State<Skilldsip> {
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
                                   FloatingActionButton.extended(
+                                    elevation: 0,
                                       label: const Text(''), // <-- Text
-                                      backgroundColor: Colors.black,
+                                      backgroundColor: Colors.transparent,
                                       icon: const Icon( // <-- Icon
                                         Icons.message_rounded,
-                                        color:Colors.white,
+                                        color:Colors.black,
                                       ),
                                       
                                       onPressed: () {
@@ -143,11 +144,12 @@ class _SkilldsipState extends State<Skilldsip> {
                                       },
                                     ),
                                       FloatingActionButton.extended(
+                                        elevation: 0,
                                       label: const Text(''), // <-- Text
-                                      backgroundColor: Colors.black,
+                                      backgroundColor:Colors.transparent,
                                       icon: const Icon( // <-- Icon
                                         Icons.location_on_rounded,
-                                        color:Colors.white,
+                                        color:Colors.black,
                                       ),
                                       
                                       onPressed: () {
@@ -155,15 +157,16 @@ class _SkilldsipState extends State<Skilldsip> {
                                       },
                                     ),
                                    FloatingActionButton.extended(
+                                    elevation: 0,
                                       label: const Text(''), // <-- Text
-                                      backgroundColor: Colors.black,
+                                      backgroundColor: Colors.transparent,
                                       icon: const Icon( // <-- Icon
                                         Icons.add_business_rounded,
-                                        color:Colors.white,
+                                        color:Colors.black,
                                       ),
                                       
                                       onPressed: () {
-                                        nextScreen(context, const ChatPage());
+                                        
                                       },
                                     ),  
 
