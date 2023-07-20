@@ -14,7 +14,7 @@ class Skillex extends StatelessWidget {
     
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: isLoggedin ?const Homepage(): const LoginScreen(),
+      home: isLoggedin ? Homepage(): LoginScreen(),
     );
   }
 }

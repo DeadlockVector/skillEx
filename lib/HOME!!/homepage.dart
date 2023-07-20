@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:skillex/helper/helper_functions.dart';
+import 'package:skillex/screens/profile_page.dart';
 
 import 'package:skillex/widgets/largeText.dart';
 import 'package:skillex/widgets/smallText.dart';
 
 import 'package:skillex/screens/login_screen.dart';
 import 'package:skillex/HOME!!/skillDisplay.dart';
+import 'package:skillex/widgets/widgets.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -15,23 +18,76 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+  String userName="Name";
+
+
   @override
+  // void initState() {
+  //   super.initState();
+  //   gettingUserData();
+  // }
+
+  //   gettingUserData() async {
+  //   await HelperFunctions.getUserNameFromSF().then((val) {
+  //     setState(() {
+  //       userName = val!;
+  //     });
+  //   });
+  // }
+
   Widget build(BuildContext context) {
     //print("current height of the screen is: "+MediaQuery.of(context).size.height.toString());
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("HOME"),
+        backgroundColor: Colors.black,
+        centerTitle: true,
+      ),
+      drawer: Drawer(
+        backgroundColor: Colors.black,
+        child: ListView(
+          padding: const EdgeInsets.symmetric(vertical:50),
+          children: <Widget> [
+            const Icon(
+              Icons.account_circle_sharp,
+              size: 150,
+              color:Colors.white,
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            const Divider(
+              height: 2,
+            ),
+            ListTile(
+              onTap: () {
+                nextScreen(context,const MyProfile());
+              },
+              contentPadding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+              leading: const Icon(Icons.account_circle_outlined,color: Colors.white,),
+              title: const Text(
+                "Profile",
+                style: TextStyle(color:Colors.white),
+              ),
+            )
+          ],
+
+        ),
+      
+      ),
       body: Column(
         children: [
           //displays the header
           Container(
-            margin: EdgeInsets.only(top: 55, bottom: 20),
-            padding: EdgeInsets.only(right: 30, left: 30),
+            margin: EdgeInsets.only(top: 15, bottom: 20),
+            padding: EdgeInsets.only(right: 15, left: 15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Column(
                   children: [
                     Largetext(
-                      text: "NAME:",
+                      text: userName,
                     ),
                     Row(
                       children: [
