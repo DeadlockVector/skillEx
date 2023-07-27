@@ -1,6 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+class AuthService {
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+
+  // login
+  Future loginWithUserNameandPassword(String email, String password) async {
+    try {
+      User user = (await firebaseAuth.signInWithEmailAndPassword(
+              email: email, password: password))
+          .user!;
+
+      if (user != null) {
+        return true;
+      }
+    } on FirebaseAuthException catch (e) {
+      return e.message;
+    }
+  }
+}
+
 class FirebaseAuthHelper {
   // function to add user details
   static Future addUserDetails(String name, String email, String lifePhase,

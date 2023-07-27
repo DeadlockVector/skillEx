@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:skillex/helper/helper_functions.dart';
 import 'package:skillex/screens/profile_page.dart';
+import 'package:skillex/screens/signup_screen.dart';
 
 import 'package:skillex/widgets/largeText.dart';
 import 'package:skillex/widgets/smallText.dart';
@@ -18,8 +19,7 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  String userName="Name";
-
+  String userName = "Name";
 
   @override
   // void initState() {
@@ -46,12 +46,34 @@ class _HomepageState extends State<Homepage> {
       drawer: Drawer(
         backgroundColor: Colors.black,
         child: ListView(
-          padding: const EdgeInsets.symmetric(vertical:50),
-          children: <Widget> [
+          padding: const EdgeInsets.symmetric(vertical: 50),
+          children: <Widget>[
             const Icon(
-              Icons.account_circle_sharp,
-              size: 150,
-              color:Colors.white,
+              Icons.home,
+              size: 100,
+              color: Colors.white,
+            ),
+            const SizedBox(
+              height: 70,
+            ),
+            const Divider(
+              height: 2,
+            ),
+            ListTile(
+              onTap: () {
+                nextScreen(context, const MyProfile());
+              },
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+              leading: const Icon(Icons.account_circle_outlined,
+                  color: Colors.white, size: 50),
+              title: const Text(
+                "Profile",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
+              ),
             ),
             const SizedBox(
               height: 30,
@@ -60,20 +82,20 @@ class _HomepageState extends State<Homepage> {
               height: 2,
             ),
             ListTile(
-              onTap: () {
-                nextScreen(context,const MyProfile());
-              },
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
-              leading: const Icon(Icons.account_circle_outlined,color: Colors.white,),
-              title: const Text(
-                "Profile",
-                style: TextStyle(color:Colors.white),
-              ),
-            )
+                onTap: () {},
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                leading: const Icon(Icons.message_outlined,
+                    color: Colors.white, size: 45),
+                title: const Text(
+                  "Messages",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                )),
           ],
-
         ),
-      
       ),
       body: Column(
         children: [
@@ -131,7 +153,7 @@ class _HomepageState extends State<Homepage> {
             ),
           ),
           //shows the body of the app.
-          Expanded(
+          const Expanded(
               child: SingleChildScrollView(
             child: Skilldsip(),
           )),
@@ -205,7 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
-                      builder: (context) => const LoginScreen(),
+                      builder: (context) => const SignUpScreen(),
                     ),
                   );
                 },
@@ -227,7 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => LoginScreen(),
+        builder: (context) => SignUpScreen(),
       ),
     );
   }

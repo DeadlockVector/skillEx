@@ -41,150 +41,152 @@ class _SkilldsipState extends State<Skilldsip> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        // Skill display slider.
-        SizedBox(
-          height: 400,
-          child: PageView.builder(
-            controller: pageController,
-            itemCount: 6,
-            itemBuilder: (context, position) {
-              return _itemDisplay(position);
-            },
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          // Skill display slider.
+          SizedBox(
+            height: 400,
+            child: PageView.builder(
+              controller: pageController,
+              itemCount: 6,
+              itemBuilder: (context, position) {
+                return _itemDisplay(position);
+              },
+            ),
           ),
-        ),
-        DotsIndicator(
-          dotsCount: 6,
-          position: _currPageValue,
-          decorator: const DotsDecorator(
-            color: Colors.grey, // Inactive color
-            activeColor: Colors.black,
+          DotsIndicator(
+            dotsCount: 6,
+            position: _currPageValue,
+            decorator: const DotsDecorator(
+              color: Colors.grey, // Inactive color
+              activeColor: Colors.black,
+            ),
           ),
-        ),
-        SizedBox(height: Dimensions.height10),
-        Container(
-          margin: EdgeInsets.only(left: Dimensions.width40),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Largetext(text: "Popular skillians: "),
-
-              SizedBox(width: Dimensions.width10),
-              Container(
-                margin: const EdgeInsets.only(bottom: 3),
-                child: Largetext(text: ".", color: Colors.black26),
-              ),
-              SizedBox(width: Dimensions.width10),
-              Container(
-                margin: const EdgeInsets.only(bottom: 2),
-                child: Largetext(text: ""),
-              ),
-            ],
-          ),
-        ),
-        // List of people ready to exchange skills.
-        SizedBox(
-          height: 700,
-          child:ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            //sshrinkWrap: true,
-            itemCount: 15,
-            itemBuilder: (context, index) {
-              return Container(
-                margin: EdgeInsets.only(right: Dimensions.width20, left: Dimensions.width20,bottom:Dimensions.height10),
-                child: Row(
-                  children: [
-                    Container(
-                      // image size if required!
-                      width:Dimensions.listViewImgSize,
-                      height :150,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(Dimensions.radius30),
-                        color: Colors.black,
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        height:130,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(Dimensions.radius30),
-                            bottomRight: Radius.circular(Dimensions.radius30),
-
-                          ),
-                          color: Colors.grey,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.only(left: Dimensions.width10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Largetext(text: "Name: ",),
-                              SizedBox(height: Dimensions.height10),
-                              const Padding(padding: EdgeInsets.only(left: 8.0)),
-                              Largetext(text: "Profession: "),
-                              const Padding(padding: EdgeInsets.only(top:12.0)),
-                              // icons.
-                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  FloatingActionButton.extended(
-                                    elevation: 0,
-                                      label: const Text(''), // <-- Text
-                                      backgroundColor: Colors.transparent,
-                                      icon: const Icon( // <-- Icon
-                                        Icons.message_rounded,
-                                        color:Colors.black,
-                                      ),
-                                      
-                                      onPressed: () {
-                                        nextScreen(context, const ChatPage());
-                                      },
-                                    ),
-                                      FloatingActionButton.extended(
-                                        elevation: 0,
-                                      label: const Text(''), // <-- Text
-                                      backgroundColor:Colors.transparent,
-                                      icon: const Icon( // <-- Icon
-                                        Icons.location_on_rounded,
-                                        color:Colors.black,
-                                      ),
-                                      
-                                      onPressed: () {
-                                        
-                                      },
-                                    ),
-                                   FloatingActionButton.extended(
-                                    elevation: 0,
-                                      label: const Text(''), // <-- Text
-                                      backgroundColor: Colors.transparent,
-                                      icon: const Icon( // <-- Icon
-                                        Icons.add_business_rounded,
-                                        color:Colors.black,
-                                      ),
-                                      
-                                      onPressed: () {
-                                        
-                                      },
-                                    ),  
-
-                                  
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
+          SizedBox(height: Dimensions.height10),
+          Container(
+            margin: EdgeInsets.only(left: Dimensions.width40),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Largetext(text: "Popular skillians: "),
+    
+                SizedBox(width: Dimensions.width10),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 3),
+                  child: Largetext(text: ".", color: Colors.black26),
                 ),
-              );
-            },
+                SizedBox(width: Dimensions.width10),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 2),
+                  child: Largetext(text: ""),
+                ),
+              ],
+            ),
           ),
-        )
-      ],
+          // List of people ready to exchange skills.
+          SizedBox(
+            height: 700,
+            child:ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              //sshrinkWrap: true,
+              itemCount: 15,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.only(right: Dimensions.width20, left: Dimensions.width20,bottom:Dimensions.height10),
+                  child: Row(
+                    children: [
+                      Container(
+                        // image size if required!
+                        width:Dimensions.listViewImgSize,
+                        height :150,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(Dimensions.radius30),
+                          color: Colors.black,
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          height:130,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(Dimensions.radius30),
+                              bottomRight: Radius.circular(Dimensions.radius30),
+    
+                            ),
+                            color: Colors.grey,
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.only(left: Dimensions.width10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Largetext(text: "Name: ",),
+                                SizedBox(height: Dimensions.height10),
+                                const Padding(padding: EdgeInsets.only(left: 8.0)),
+                                Largetext(text: "Profession: "),
+                                const Padding(padding: EdgeInsets.only(top:12.0)),
+                                // icons.
+                                 Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: [
+                                    FloatingActionButton.extended(
+                                      elevation: 0,
+                                        label: const Text(''), // <-- Text
+                                        backgroundColor: Colors.transparent,
+                                        icon: const Icon( // <-- Icon
+                                          Icons.message_rounded,
+                                          color:Colors.black,
+                                        ),
+                                        
+                                        onPressed: () {
+                                          nextScreen(context, const ChatPage());
+                                        },
+                                      ),
+                                        FloatingActionButton.extended(
+                                          elevation: 0,
+                                        label: const Text(''), // <-- Text
+                                        backgroundColor:Colors.transparent,
+                                        icon: const Icon( // <-- Icon
+                                          Icons.location_on_rounded,
+                                          color:Colors.black,
+                                        ),
+                                        
+                                        onPressed: () {
+                                          
+                                        },
+                                      ),
+                                     FloatingActionButton.extended(
+                                      elevation: 0,
+                                        label: const Text(''), // <-- Text
+                                        backgroundColor: Colors.transparent,
+                                        icon: const Icon( // <-- Icon
+                                          Icons.add_business_rounded,
+                                          color:Colors.black,
+                                        ),
+                                        
+                                        onPressed: () {
+                                          
+                                        },
+                                      ),  
+    
+                                    
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              },
+            ),
+          )
+        ],
+      ),
     );
   }
   Widget _itemDisplay(int index) {
