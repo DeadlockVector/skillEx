@@ -353,7 +353,7 @@ class _LoginPageState extends State<LoginPage> {
                                     decoration: TextDecoration.underline),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    nextScreen(context, const SignUpScreen());
+                                    nextScreen(context, const RegisterPage());
                                   }),
                           ],
                         )),
@@ -380,8 +380,14 @@ class _LoginPageState extends State<LoginPage> {
           await HelperFunctions.saveUserLoggedInStatus(true);
           await HelperFunctions.saveUserEmailSF(email);
           await HelperFunctions.saveUserNameSF(snapshot.docs[0]['fullName']);
+          String userName = '';
+          await HelperFunctions.getUserNameFromSF().then((val) {
+            setState(() {
+              userName = val!;
+            });
+          });
           // ignore: use_build_context_synchronously
-          nextScreenReplace(context, const Homepage());
+          nextScreenReplace(context, Homepage(userName: userName));
         } else {
           showSnackbar(context, Colors.red, value);
           setState(() {

@@ -1,301 +1,241 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
-// for authentication and validation of entered fields
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:skillex/HOME!!/homepage.dart';
 import 'package:skillex/helper/firebase_auth.dart';
-import 'package:skillex/helper/validator.dart';
+import 'package:skillex/helper/helper_functions.dart';
+import 'package:skillex/screens/login_screen.dart';
+import 'package:skillex/widgets/widgets.dart';
 
-// to navigate to student/working profile creation
-import 'package:skillex/screens/student_profile_screen.dart';
-import 'package:skillex/screens/working_profile_screen.dart';
-
-// used to go to home screen, not in use anymore (for now)
-//import 'package:skillex/HOME!!/homepage.dart';
-
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
-  _SignUpScreenState createState() => _SignUpScreenState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
-  final _registerFormKey = GlobalKey<FormState>();
-
-  final _emailTextController = TextEditingController();
-  final _passwordTextController = TextEditingController();
-  final _nameTextController = TextEditingController();
-  final _lifePhaseTextController = TextEditingController();
-  final _ageTextController = TextEditingController();
-  final _phoneNumberTextController = TextEditingController();
-
-  final _focusEmail = FocusNode();
-  final _focusPassword = FocusNode();
-  final _focusName = FocusNode();
-  final _focuslifePhase = FocusNode();
-  final _focusAge = FocusNode();
-  final _focusPhoneNum = FocusNode();
-
-  bool _isProcessing = false;
-
+class _RegisterPageState extends State<RegisterPage> {
+  bool _isLoading = false;
+  final formKey = GlobalKey<FormState>();
+  String email = "";
+  String password = "";
+  String fullName = "";
+  String age = '';
+  String phoneNumber = '';
+  AuthService authService = AuthService();
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        _focusEmail.unfocus();
-        _focusPassword.unfocus();
-        _focusName.unfocus();
-        _focuslifePhase.unfocus();
-        _focusAge.unfocus();
-        _focusPhoneNum.unfocus();
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-          title: const Text('Create Account'),
-          centerTitle: true,
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Form(
-                    key: _registerFormKey,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('CREATE AN ACCOUNT'),
+        backgroundColor: Colors.black,
+        // elevation: 0,
+        centerTitle: true,
+      ),
+      body: _isLoading
+          ? const Center(child: CircularProgressIndicator(color: Colors.black))
+          : SingleChildScrollView(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+                child: Form(
+                    key: formKey,
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        const Icon(Icons.person_pin_circle_rounded, size: 175),
-                        const SizedBox(height: 12.0),
-                        // name of the user
+                        const Text(
+                          "SKILL-EX",
+                          style: TextStyle(
+                              fontSize: 40, fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 10),
+                        Image.asset("assets/skill.png"),
+                        const SizedBox(height: 10),
+                        const Text("Create your account now!",
+                            style: TextStyle(
+                                fontSize: 25, fontWeight: FontWeight.bold)),
+                        const SizedBox(height: 30),
                         TextFormField(
-                          controller: _nameTextController,
-                          focusNode: _focusName,
-                          decoration: InputDecoration(
-                            icon: const Icon(
-                              Icons.person,
+                          decoration: textInputDecoration.copyWith(
+                              labelText: "Full Name",
+                              prefixIcon: const Icon(
+                                Icons.person,
+                                color: Colors.black,
+                              )),
+                          onChanged: (val) {
+                            setState(() {
+                              fullName = val;
+                            });
+                          },
+                          validator: (val) {
+                            if (val!.isNotEmpty) {
+                              return null;
+                            } else {
+                              return "Name cannot be empty";
+                            }
+                          },
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        TextFormField(
+                          decoration: textInputDecoration.copyWith(
+                              labelText: 'Age',
+                              prefixIcon: const Icon(
+                                Icons.calendar_today,
+                                color: Colors.black,
+                              )),
+                          onChanged: (val) {
+                            setState(() {
+                              age = val;
+                            });
+                          },
+                          validator: (val) {
+                            return age == '' ? "Please enter an age" : null;
+                          },
+                        ),
+                        const SizedBox(height: 15),
+                        TextFormField(
+                          decoration: textInputDecoration.copyWith(
+                            labelText: 'Phone Number',
+                            prefixIcon: const Icon(
+                              Icons.phone_rounded,
                               color: Colors.black,
                             ),
-                            hintText: "Name",
-                            errorBorder: UnderlineInputBorder(
-                              borderRadius: BorderRadius.circular(6.0),
-                              borderSide: const BorderSide(
-                                color: Color.fromARGB(255, 0, 0, 0),
-                              ),
-                            ),
                           ),
+                          onChanged: (val) {
+                            setState(() {
+                              phoneNumber = val;
+                            });
+                          },
+                          validator: (val) {
+                            return (val!.length != 10)
+                                ? "Enter a valid number"
+                                : null;
+                          },
                         ),
-                        const SizedBox(height: 12.0),
-        
-                        // age of the user
-                        TextFormField(
-                          controller: _ageTextController,
-                          focusNode: _focusAge,
-                          decoration: InputDecoration(
-                            icon: const Icon(
-                              Icons.calendar_month,
-                              color: Colors.black,
-                            ),
-                            hintText: "Age",
-                            errorBorder: UnderlineInputBorder(
-                              borderRadius: BorderRadius.circular(6.0),
-                              borderSide: const BorderSide(
-                                color: Color.fromARGB(255, 0, 0, 0),
-                              ),
-                            ),
-                          ),
+                        const SizedBox(
+                          height: 15,
                         ),
-                        const SizedBox(height: 12.0),
-        
-                        // phone number of the user
                         TextFormField(
-                          controller: _phoneNumberTextController,
-                          focusNode: _focusPhoneNum,
-                          decoration: InputDecoration(
-                            icon: const Icon(Icons.phone_android,
-                                color: Colors.black),
-                            hintText: "Phone number",
-                            errorBorder: UnderlineInputBorder(
-                              borderRadius: BorderRadius.circular(6.0),
-                              borderSide: const BorderSide(
-                                color: Color.fromARGB(255, 0, 0, 0),
-                              ),
-                            ),
-                          ),
+                          decoration: textInputDecoration.copyWith(
+                              labelText: "Email",
+                              prefixIcon: const Icon(
+                                Icons.email,
+                                color: Colors.black,
+                              )),
+                          onChanged: (val) {
+                            setState(() {
+                              email = val;
+                            });
+                          },
+
+                          // check tha validation
+                          validator: (val) {
+                            return RegExp(
+                                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                    .hasMatch(val!)
+                                ? null
+                                : "Please enter a valid email";
+                          },
                         ),
-                        const SizedBox(height: 12.0),
-        
+                        const SizedBox(height: 15),
                         TextFormField(
-                          controller: _emailTextController,
-                          focusNode: _focusEmail,
-                          validator: (value) => Validator.validateEmail(
-                            email: value,
-                          ),
-                          decoration: InputDecoration(
-                            icon: const Icon(
-                              Icons.email,
-                              color: Colors.black,
-                            ),
-                            hintText: "Email",
-                            errorBorder: UnderlineInputBorder(
-                              borderRadius: BorderRadius.circular(6.0),
-                              borderSide: const BorderSide(
-                                color: Color.fromARGB(255, 0, 0, 0),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 12.0),
-                        TextFormField(
-                          controller: _passwordTextController,
-                          focusNode: _focusPassword,
                           obscureText: true,
-                          validator: (value) => Validator.validatePassword(
-                            password: value,
-                          ),
-                          decoration: InputDecoration(
-                            icon: const Icon(
-                              Icons.remove_red_eye,
-                              color: Colors.black,
+                          decoration: textInputDecoration.copyWith(
+                              labelText: "Password",
+                              prefixIcon: const Icon(
+                                Icons.lock,
+                                color: Colors.black,
+                              )),
+                          validator: (val) {
+                            if (val!.length < 6) {
+                              return "Password must be at least 6 characters";
+                            } else {
+                              return null;
+                            }
+                          },
+                          onChanged: (val) {
+                            setState(() {
+                              password = val;
+                            });
+                          },
+                        ),
+
+ 
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.black,
+                                elevation: 0,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30))),
+                            child: const Text(
+                              "Register",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16),
                             ),
-                            hintText: "Password",
-                            errorBorder: UnderlineInputBorder(
-                              borderRadius: BorderRadius.circular(6.0),
-                              borderSide: const BorderSide(
-                                color: Color.fromARGB(255, 0, 0, 0),
-                              ),
-                            ),
+                            onPressed: () {
+                              register();
+                            },
                           ),
                         ),
-                        const SizedBox(height: 12.0),
-                        TextFormField(
-                          controller: _lifePhaseTextController,
-                          focusNode: _focuslifePhase,
-                          validator: (value) => Validator.validatelifePhase(
-                            lifePhase: value,
-                          ),
-                          decoration: InputDecoration(
-                            icon: const Icon(
-                              Icons.school_sharp,
-                              color: Colors.black,
-                            ),
-                            hintText: "Student/Working",
-                            errorBorder: UnderlineInputBorder(
-                              borderRadius: BorderRadius.circular(6.0),
-                              borderSide: const BorderSide(
-                                color: Color.fromARGB(255, 0, 0, 0),
-                              ),
-                            ),
-                          ),
+                        const SizedBox(
+                          height: 20,
                         ),
-                        const SizedBox(height: 60.0),
-        
-                        _isProcessing
-                            ? const CircularProgressIndicator()
-                            : Row(
-                                children: [
-                                  Expanded(
-                                    child: ElevatedButton(
-                                      onPressed: () async {
-                                        setState(() {
-                                          _isProcessing = true;
-                                        });
-        
-                                        if (_registerFormKey.currentState!
-                                            .validate()) {
-                                          User? user = await FirebaseAuthHelper
-                                              .registerUsingEmailPassword(
-                                            email:
-                                                _emailTextController.text.trim(),
-                                            password: _passwordTextController.text
-                                                .trim(),
-                                            name: _nameTextController.text.trim(),
-                                            lifePhase: _lifePhaseTextController
-                                                .text
-                                                .trim(),
-                                            age: int.parse(
-                                                _ageTextController.text.trim()),
-                                            phoneNumber: int.parse(
-                                                _phoneNumberTextController.text
-                                                    .trim()),
-                                          );
-        
-                                          setState(() {
-                                            _isProcessing = false;
-                                          });
-        
-                                          if (user != null) {
-                                            if (_lifePhaseTextController.text
-                                                    .toLowerCase() ==
-                                                "student") {
-                                              print(_lifePhaseTextController.text
-                                                  .toLowerCase());
-                                              Navigator.of(context)
-                                                  .pushAndRemoveUntil(
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      StudentProfileScreen(),
-                                                ),
-                                                ModalRoute.withName('/'),
-                                              );
-                                            } else if (_lifePhaseTextController
-                                                    .text
-                                                    .toLowerCase() ==
-                                                "working") {
-                                              print(_lifePhaseTextController.text
-                                                  .toLowerCase());
-                                              Navigator.of(context)
-                                                  .pushAndRemoveUntil(
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      WorkingProfileScreen(),
-                                                ),
-                                                ModalRoute.withName('/'),
-                                              );
-                                            }
-        
-                                            // to revert back, remove everything under the nested if, including the nested if
-                                            /*
-                                            Navigator.of(context)
-                                                .pushAndRemoveUntil(
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    HomeScreen(user: user),
-                                              ),
-                                              ModalRoute.withName('/'),
-                                            );
-                                            */
-                                          }
-                                        } else {
-                                          setState(() {
-                                            _isProcessing = false;
-                                          });
-                                        }
-                                      },
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                                const Color.fromARGB(
-                                                    255, 0, 0, 0)),
-                                      ),
-                                      child: const Text(
-                                        'Sign up',
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )
+                        Text.rich(TextSpan(
+                          text: "Already have an account? ",
+                          style: const TextStyle(
+                              color: Colors.black, fontSize: 14),
+                          children: <TextSpan>[
+                            TextSpan(
+                                text: "Login now",
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    decoration: TextDecoration.underline),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    nextScreenReplace(
+                                        context, const LoginPage());
+                                  }),
+                          ],
+                        )),
                       ],
-                    ),
-                  )
-                ],
+                    )),
               ),
             ),
-          ),
-        ),
-      ),
     );
+  }
+
+  register() async {
+    if (formKey.currentState!.validate()) {
+      setState(() {
+        _isLoading = true;
+      });
+      await authService
+          .registerUserWithEmailandPassword(fullName, email, password)
+          .then((value) async {
+        if (value == true) {
+          // saving the shared preference state
+          await HelperFunctions.saveUserLoggedInStatus(true);
+          await HelperFunctions.saveUserEmailSF(email);
+          await HelperFunctions.saveUserNameSF(fullName);
+          await HelperFunctions.saveUserAgeSF(age);
+          await HelperFunctions.saveUserPhoneSF(phoneNumber);
+          nextScreenReplace(context, Homepage(userName: fullName,));
+        } else {
+          showSnackbar(context, Colors.red, value);
+          setState(() {
+            _isLoading = false;
+          });
+        }
+      });
+    }
   }
 }

@@ -12,14 +12,14 @@ import 'package:skillex/HOME!!/skillDisplay.dart';
 import 'package:skillex/widgets/widgets.dart';
 
 class Homepage extends StatefulWidget {
-  const Homepage({Key? key}) : super(key: key);
+  String userName = '';
+  Homepage({Key? key, required this.userName}) : super(key: key);
 
   @override
   State<Homepage> createState() => _HomepageState();
 }
 
 class _HomepageState extends State<Homepage> {
-  String userName = "Name";
 
   @override
   // void initState() {
@@ -109,7 +109,7 @@ class _HomepageState extends State<Homepage> {
                 Column(
                   children: [
                     Largetext(
-                      text: userName,
+                      text: widget.userName,
                     ),
                     Row(
                       children: [
@@ -227,7 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
-                      builder: (context) => const SignUpScreen(),
+                      builder: (context) => const LoginPage(),
                     ),
                   );
                 },
@@ -249,7 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (context) => SignUpScreen(),
+        builder: (context) => const LoginPage(),
       ),
     );
   }

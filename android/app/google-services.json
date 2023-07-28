@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "553993217496",
-    "project_id": "skill-ex-1fd48",
-    "storage_bucket": "skill-ex-1fd48.appspot.com"
+    "project_number": "823503710273",
+    "project_id": "skill-ex-fac7c",
+    "storage_bucket": "skill-ex-fac7c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:553993217496:android:34348df0ec60c87c4fbead",
+        "mobilesdk_app_id": "1:823503710273:android:a77a9c9947f30405f3bec0",
         "android_client_info": {
           "package_name": "com.ak47.skillex"
         }
       },
       "oauth_client": [
         {
-          "client_id": "553993217496-21t4tueoe89i4dvusshba7alb02vq3rk.apps.googleusercontent.com",
+          "client_id": "823503710273-n4lf04iv54e06fc3ukc3dui4fmktj2fm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ak47.skillex",
+            "certificate_hash": "923aeebf29fe6e18c22f335a96d0fb0d408925f4"
+          }
+        },
+        {
+          "client_id": "823503710273-4plmljpr9e3srr3hpk0todvm1c5guus0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDa15QhVeFb7SW9SRDAioc2e9YOHxp5suc"
+          "current_key": "AIzaSyAR4lu2PT-c7PU5zZcl3Jyis41K-BJQEqc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "553993217496-21t4tueoe89i4dvusshba7alb02vq3rk.apps.googleusercontent.com",
+              "client_id": "823503710273-4plmljpr9e3srr3hpk0todvm1c5guus0.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

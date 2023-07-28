@@ -15,7 +15,7 @@ class Skillex extends StatelessWidget {
   bool isLoggedin = true;
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: LoginPage(),
     );
