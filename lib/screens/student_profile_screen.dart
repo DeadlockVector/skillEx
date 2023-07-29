@@ -5,7 +5,10 @@ import 'package:skillex/helper/firebase_auth.dart';
 import 'package:skillex/helper/validator.dart';
 
 class StudentProfileScreen extends StatefulWidget {
-  const StudentProfileScreen({super.key});
+  String userName='';
+  StudentProfileScreen({Key? key, required this.userName})
+      : super(key: key);
+
 
   @override
   _StudentProfileScreenState createState() => _StudentProfileScreenState();
@@ -46,6 +49,7 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
               padding: const EdgeInsets.all(24.0),
               child: Center(
                 child: Column(
+                  
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Form(
@@ -53,6 +57,11 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
                       child: Column(
                         children: <Widget>[
                           const Icon(Icons.school_sharp, size: 175),
+                          const SizedBox(height: 12),
+                          Text ("Welcome, " + widget.userName,
+                          style: const TextStyle(
+                            fontSize: 40,fontWeight: FontWeight.bold
+                          ),),
                           const SizedBox(height: 12.0),
                           TextFormField(
                             controller: _universityTextController,

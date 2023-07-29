@@ -387,7 +387,11 @@ class _LoginPageState extends State<LoginPage> {
             });
           });
           // ignore: use_build_context_synchronously
-          nextScreenReplace(context, Homepage(userName: userName));
+          Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => Homepage(userName: userName,),
+                    ),
+                  );
         } else {
           showSnackbar(context, Colors.red, value);
           setState(() {

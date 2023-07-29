@@ -1,23 +1,43 @@
 [
     {
-        "merged": "com.example.skillex.app-merged_res-16:/mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "com.example.skillex.app-main-9:/mipmap-xxhdpi/ic_launcher.png"
+        "merged": "C:\\Users\\sachi\\.gradle\\daemon\\7.5\\com.example.skillex.app-merged_res-16:\\mipmap-mdpi_pfp_72.png.flat",
+        "source": "C:\\Users\\sachi\\.gradle\\daemon\\7.5\\com.example.skillex.app-main-9:\\mipmap-mdpi\\pfp_72.png"
     },
     {
-        "merged": "com.example.skillex.app-merged_res-16:/drawable_launch_background.xml.flat",
-        "source": "com.example.skillex.app-main-9:/drawable/launch_background.xml"
+        "merged": "com.example.skillex.app-merged_res-16:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.example.skillex.app-main-9:/mipmap-xxhdpi/ic_launcher.png"
     },
     {
         "merged": "com.example.skillex.app-merged_res-16:/mipmap-xxxhdpi_ic_launcher.png.flat",
         "source": "com.example.skillex.app-main-9:/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
-        "merged": "com.example.skillex.app-merged_res-16:/drawable-v21_launch_background.xml.flat",
-        "source": "com.example.skillex.app-main-9:/drawable-v21/launch_background.xml"
+        "merged": "C:\\Users\\sachi\\.gradle\\daemon\\7.5\\com.example.skillex.app-merged_res-16:\\drawable-v21_launch_background.xml.flat",
+        "source": "C:\\Users\\sachi\\.gradle\\daemon\\7.5\\com.example.skillex.app-main-9:\\drawable-v21\\launch_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\sachi\\.gradle\\daemon\\7.5\\com.example.skillex.app-merged_res-16:\\mipmap-xxhdpi_pfp_144.png.flat",
+        "source": "C:\\Users\\sachi\\.gradle\\daemon\\7.5\\com.example.skillex.app-main-9:\\mipmap-xxhdpi\\pfp_144.png"
     },
     {
         "merged": "com.example.skillex.app-merged_res-16:/mipmap-mdpi_ic_launcher.png.flat",
         "source": "com.example.skillex.app-main-9:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\sachi\\.gradle\\daemon\\7.5\\com.example.skillex.app-merged_res-16:\\mipmap-hdpi_pfp_36.png.flat",
+        "source": "C:\\Users\\sachi\\.gradle\\daemon\\7.5\\com.example.skillex.app-main-9:\\mipmap-hdpi\\pfp_36.png"
+    },
+    {
+        "merged": "C:\\Users\\sachi\\.gradle\\daemon\\7.5\\com.example.skillex.app-merged_res-16:\\mipmap-xxxhdpi_pfp_192.png.flat",
+        "source": "C:\\Users\\sachi\\.gradle\\daemon\\7.5\\com.example.skillex.app-main-9:\\mipmap-xxxhdpi\\pfp_192.png"
+    },
+    {
+        "merged": "C:\\Users\\sachi\\.gradle\\daemon\\7.5\\com.example.skillex.app-merged_res-16:\\mipmap-xhdpi_pfp_96.png.flat",
+        "source": "C:\\Users\\sachi\\.gradle\\daemon\\7.5\\com.example.skillex.app-main-9:\\mipmap-xhdpi\\pfp_96.png"
+    },
+    {
+        "merged": "C:\\Users\\sachi\\.gradle\\daemon\\7.5\\com.example.skillex.app-merged_res-16:\\drawable_launch_background.xml.flat",
+        "source": "C:\\Users\\sachi\\.gradle\\daemon\\7.5\\com.example.skillex.app-main-9:\\drawable\\launch_background.xml"
     },
     {
         "merged": "com.example.skillex.app-merged_res-16:/mipmap-hdpi_ic_launcher.png.flat",
