@@ -2,7 +2,6 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:skillex/HOME!!/highestRated.dart';
 import 'package:skillex/imp/dimensions.dart';
-import 'package:skillex/imp/matter.dart';
 import 'package:skillex/screens/chat_page.dart';
 import 'package:skillex/widgets/iconsImages.dart';
 import 'package:skillex/widgets/largeText.dart';

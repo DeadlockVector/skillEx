@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:skillex/helper/helper_functions.dart';
 import 'package:skillex/screens/profile_page.dart';
-import 'package:skillex/screens/signup_screen.dart';
 
 import 'package:skillex/widgets/largeText.dart';
 import 'package:skillex/widgets/smallText.dart';
@@ -101,8 +99,8 @@ class _HomepageState extends State<Homepage> {
         children: [
           //displays the header
           Container(
-            margin: EdgeInsets.only(top: 15, bottom: 20),
-            padding: EdgeInsets.only(right: 15, left: 15),
+            margin: const EdgeInsets.only(top: 15, bottom: 20),
+            padding: const EdgeInsets.only(right: 15, left: 15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -166,7 +164,7 @@ class _HomepageState extends State<Homepage> {
 class HomeScreen extends StatefulWidget {
   final User user;
 
-  const HomeScreen({required this.user});
+  const HomeScreen({super.key, required this.user});
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -190,8 +188,8 @@ class _HomeScreenState extends State<HomeScreen> {
             context: context,
             builder: (context) {
               return AlertDialog(
-                title: new Text('Are you sure?'),
-                content: new Text('Do you want to logout from this App'),
+                title: const Text('Are you sure?'),
+                content: const Text('Do you want to logout from this App'),
                 actionsAlignment: MainAxisAlignment.spaceBetween,
                 actions: [
                   TextButton(
@@ -231,11 +229,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   );
                 },
-                child: const Text('Sign out'),
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(
                       const Color.fromARGB(255, 0, 0, 0)),
                 ),
+                child: const Text('Sign out'),
               ),
             ],
           ),

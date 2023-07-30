@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:skillex/helper/database_services.dart';
 import 'package:skillex/helper/helper_functions.dart';
@@ -13,9 +12,7 @@ class AuthService {
               email: email, password: password))
           .user!;
 
-      if (user != null) {
-        return true;
-      }
+      return true;
     } on FirebaseAuthException catch (e) {
       return e.message;
     }
@@ -29,11 +26,8 @@ class AuthService {
               email: email, password: password))
           .user!;
 
-      if (user != null) {
-        // call our database service to update the user data.
-        await DatabaseService(uid: user.uid).savingUserData(fullName, email);
-        return true;
-      }
+      await DatabaseService(uid: user.uid).savingUserData(fullName, email);
+      return true;
     } on FirebaseAuthException catch (e) {
       return e.message;
     }

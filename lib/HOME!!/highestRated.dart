@@ -1,5 +1,4 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:skillex/imp/matter.dart';
 import 'package:skillex/widgets/expandable_text.dart';
@@ -22,7 +21,7 @@ class HighestRatedsk extends StatelessWidget {
                 width: double.maxFinite,
                 height: Dimensions.coverdisp,
 
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   /*image: DecorationImage(
                      fit:BoxFit.cover,
                       image:AssetImage(
@@ -39,7 +38,7 @@ class HighestRatedsk extends StatelessWidget {
             height: Dimensions.height20,
             left: Dimensions.width20,
             right: Dimensions.width20,
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Icon(Icons.arrow_back_ios_new_sharp,color:Colors.white,size: 30,),
@@ -63,10 +62,10 @@ class HighestRatedsk extends StatelessWidget {
                 child:Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AppColumn(text: "Name of the user.",),
+                    const AppColumn(text: "Name of the user.",),
                     SizedBox(height: Dimensions.height20,),
                     Smalltext(text: "About me: "),
-                    Expanded(child: SingleChildScrollView(child: ExpText(text: "Motivated professional seeking a challenging position to utilize skills and experience for organizational success.Bachelor of Science in Business Administration | XYZ University | Anytown, USA | Graduated May 20XXMarketing principles and strategies Social media marketing"),)),
+                    const Expanded(child: SingleChildScrollView(child: ExpText(text: "Motivated professional seeking a challenging position to utilize skills and experience for organizational success.Bachelor of Science in Business Administration | XYZ University | Anytown, USA | Graduated May 20XXMarketing principles and strategies Social media marketing"),)),
 
                   ],
                 ),
@@ -88,19 +87,19 @@ class HighestRatedsk extends StatelessWidget {
           children: [
             Container(
               padding: EdgeInsets.only(top: Dimensions.height15, bottom: Dimensions.height15,left: Dimensions.width20,right: Dimensions.width20),
-              child:Smalltext(text: "Status",),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.radius40/2),
                 color: Colors.white,
               ),
+              child:Smalltext(text: "Status",),
             ),
             Container(
               padding: EdgeInsets.only(top: Dimensions.height15, bottom: Dimensions.height15,left: Dimensions.width20,right: Dimensions.width20),
-              child: Smalltext(text: "Bookmark",),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.radius40/2),
                 color: Colors.white,
               ),
+              child: Smalltext(text: "Bookmark",),
             )
           ],
         ),

@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:skillex/widgets/smallText.dart';
 
 import '../imp/dimensions.dart';
@@ -32,11 +30,12 @@ class _ExpTextState extends State<ExpText> {
       secondHalf="";
     }
   }
+  @override
   Widget build(BuildContext context) {
     return Container(
       child: secondHalf.isEmpty?Smalltext(text: firstHalf):Column(
         children: [
-          Smalltext(height:1.8,size:Dimensions.font16,text: hiddenText?(firstHalf+"..."):(firstHalf+secondHalf)),
+          Smalltext(height:1.8,size:Dimensions.font16,text: hiddenText?("$firstHalf..."):(firstHalf+secondHalf)),
           InkWell(
             onTap: (){
               setState(() {

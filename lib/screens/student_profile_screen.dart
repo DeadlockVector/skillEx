@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 // for authentication, validation of entered fields
-import 'package:skillex/helper/firebase_auth.dart';
-import 'package:skillex/helper/validator.dart';
 
 class StudentProfileScreen extends StatefulWidget {
   const StudentProfileScreen({super.key});

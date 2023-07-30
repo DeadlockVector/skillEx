@@ -24,7 +24,7 @@ class _ChatPageState extends State<ChatPage> {
           // Chat messages container
           Expanded(
             child: ListView(
-              children: [
+              children: const [
 
               ],
             ),
@@ -45,7 +45,7 @@ class _ChatPageState extends State<ChatPage> {
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.send),
+                  icon: const Icon(Icons.send),
                   onPressed: () {
                     // Handle sending the message here
                     String message = _messageController.text;
