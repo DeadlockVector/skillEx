@@ -7,6 +7,7 @@ import 'package:skillex/helper/firebase_auth.dart';
 import 'package:skillex/helper/helper_functions.dart';
 import 'package:skillex/screens/login_screen.dart';
 import 'package:skillex/screens/student_profile_screen.dart';
+import 'package:skillex/screens/working_profile_screen.dart';
 import 'package:skillex/widgets/widgets.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -234,8 +235,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                     decoration: TextDecoration.underline),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    nextScreenReplace(
-                                        context, const LoginPage());
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => const LoginPage()));
+                                    Navigator.pop(context);
                                   }),
                           ],
                         )),
@@ -270,11 +274,16 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
             );
           } else {
-            showSnackbar(context, Colors.red, value);
-            setState(() {
-              _isLoading = false;
-            });
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => WorkingProfileScreen(userName: fullName)));
           }
+        } else {
+          showSnackbar(context, Colors.red, value);
+          setState(() {
+            _isLoading = false;
+          });
         }
       });
     }

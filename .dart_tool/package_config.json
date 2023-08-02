@@ -134,6 +134,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "flutter_multiselect",
+      "rootUri": "file:///C:/Users/sachi/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_multiselect-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///C:/Users/sachi/Downloads/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -338,7 +344,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-07-28T16:16:38.422940Z",
+  "generated": "2023-07-30T17:25:58.688748Z",
   "generator": "pub",
   "generatorVersion": "3.0.6"
 }
