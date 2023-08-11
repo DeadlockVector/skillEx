@@ -1,137 +1,189 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_multiselect/flutter_multiselect.dart';
+import 'package:skillex/HOME!!/homepage.dart';
 
 // for authentication, validation of entered fields
 import 'package:skillex/helper/firebase_auth.dart';
+import 'package:skillex/helper/helper_functions.dart';
 import 'package:skillex/helper/validator.dart';
+import 'package:skillex/widgets/widgets.dart';
 
 class StudentProfileScreen extends StatefulWidget {
-  const StudentProfileScreen({super.key});
+  String userName = '';
+  StudentProfileScreen({Key? key, required this.userName}) : super(key: key);
 
   @override
   _StudentProfileScreenState createState() => _StudentProfileScreenState();
 }
 
 class _StudentProfileScreenState extends State<StudentProfileScreen> {
-  final _registerFormKey = GlobalKey<FormState>();
-
-  // add profile links (github, insta, etc?)
-  // add skills
-  final _universityTextController = TextEditingController();
-  final _locationTextController = TextEditingController();
-  final _branchTextController = TextEditingController();
-  final _semesterTextController = TextEditingController();
-
-  final _focusUniversity = FocusNode();
-  final _focusLocation = FocusNode();
-  final _focusBranch = FocusNode();
-  final _focusSemester = FocusNode();
-
-  //bool _isProcession = false;
+  final formKey = GlobalKey<FormState>();
+  bool _isLoading = false;
+  String university = '';
+  String city = '';
+  String branch = '';
+  String semesters = '';
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        _focusUniversity.unfocus();
-        _focusLocation.unfocus();
-        _focusBranch.unfocus();
-        _focusSemester.unfocus();
-      },
-      child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.black,
-            title: const Text('Profile Information'),
-          ),
-          body: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Form(
-                      key: _registerFormKey,
-                      child: Column(
-                        children: <Widget>[
-                          const Icon(Icons.school_sharp, size: 175),
-                          const SizedBox(height: 12.0),
-                          TextFormField(
-                            controller: _universityTextController,
-                            focusNode: _focusUniversity,
-                            decoration: InputDecoration(
-                              icon: const Icon(
-                                Icons.school_outlined,
-                                color: Colors.black,
-                              ),
-                              hintText: "University",
-                              errorBorder: UnderlineInputBorder(
-                                borderRadius: BorderRadius.circular(6.0),
-                                borderSide: const BorderSide(
-                                  color: Color.fromARGB(255, 0, 0, 0),
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 12.0),
-                          TextFormField(
-                            controller: _locationTextController,
-                            focusNode: _focusLocation,
-                            decoration: InputDecoration(
-                              icon: const Icon(
-                                Icons.map_rounded,
-                                color: Colors.black,
-                              ),
-                              hintText: "City",
-                              errorBorder: UnderlineInputBorder(
-                                borderRadius: BorderRadius.circular(6.0),
-                                borderSide: const BorderSide(
-                                  color: Color.fromARGB(255, 0, 0, 0),
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 12.0),
-                          TextFormField(
-                            controller: _branchTextController,
-                            focusNode: _focusBranch,
-                            decoration: InputDecoration(
-                              icon: const Icon(
-                                Icons.book_online_rounded,
-                                color: Colors.black,
-                              ),
-                              hintText: "Branch of Study",
-                              errorBorder: UnderlineInputBorder(
-                                borderRadius: BorderRadius.circular(6.0),
-                                borderSide: const BorderSide(
-                                  color: Color.fromARGB(255, 0, 0, 0),
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 12.0),
-                          TextFormField(
-                            controller: _semesterTextController,
-                            focusNode: _focusSemester,
-                            decoration: InputDecoration(
-                              icon: const Icon(
-                                Icons.bookmark_add,
-                                color: Colors.black,
-                              ),
-                              hintText: "Semester in Uni",
-                              errorBorder: UnderlineInputBorder(
-                                borderRadius: BorderRadius.circular(6.0),
-                                borderSide: const BorderSide(
-                                  color: Color.fromARGB(255, 0, 0, 0),
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 60.0),
-                        ],
+    return _isLoading
+        ? const Center(
+            child: CircularProgressIndicator(color: Colors.black),
+          )
+        : Scaffold(
+            appBar: AppBar(
+              title: const Text('Student Details'),
+              backgroundColor: Colors.black,
+              centerTitle: true,
+            ),
+            body: SingleChildScrollView(
+                child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+              child: Form(
+                  key: formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Image.asset("assets/skill.png"),
+                      const SizedBox(
+                        height: 20,
                       ),
-                    ),
-                  ],
-                ),
-              ))),
-    );
+                      Text(
+                        "Welcome, " + widget.userName,
+                        style: const TextStyle(
+                            fontSize: 40, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        decoration: textInputDecoration.copyWith(
+                            labelText: 'University',
+                            prefixIcon: const Icon(
+                              Icons.school_outlined,
+                              color: Colors.black,
+                            )),
+                        onChanged: (val) {
+                          setState(() {
+                            university = val;
+                          });
+                        },
+                        validator: (val) {
+                          if (val!.isNotEmpty) {
+                            return null;
+                          } else {
+                            return 'Please enter your Location';
+                          }
+                        },
+                      ),
+
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      TextFormField(
+                        decoration: textInputDecoration.copyWith(
+                            labelText: 'City',
+                            prefixIcon: const Icon(
+                              Icons.location_city_outlined,
+                              color: Colors.black,
+                            )),
+                        onChanged: (val) {
+                          setState(() {
+                            city = val;
+                          });
+                        },
+                        validator: (val) {
+                          if (val!.isNotEmpty) {
+                            return null;
+                          } else {
+                            return 'Please enter your Location';
+                          }
+                        },
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      TextFormField(
+                        decoration: textInputDecoration.copyWith(
+                            labelText: 'Branch of Study',
+                            prefixIcon: const Icon(
+                              Icons.assignment_ind_outlined,
+                              color: Colors.black,
+                            )),
+                        onChanged: (val) {
+                          setState(() {
+                            branch = val;
+                          });
+                        },
+                        validator: (val) {
+                          if (val!.isNotEmpty) {
+                            return null;
+                          } else {
+                            return 'Please enter your branch of study';
+                          }
+                        },
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      TextFormField(
+                        decoration: textInputDecoration.copyWith(
+                            labelText: 'Semester',
+                            prefixIcon: const Icon(
+                              Icons.schedule_outlined,
+                              color: Colors.black,
+                            )),
+                        onChanged: (val) {
+                          setState(() {
+                            semesters = val;
+                          });
+                        },
+                        validator: (val) {
+                          if (val!.isNotEmpty) {
+                            return null;
+                          } else {
+                            return 'Enter your semester';
+                          }
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.black,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30))),
+                          child: const Text(
+                            "Submit",
+                            style: TextStyle(color: Colors.white, fontSize: 16),
+                          ),
+                          onPressed: () {
+                            goAhead();
+                          },
+                        ),
+                      )
+                    ],
+                  )),
+            )),
+          );
+  }
+
+  goAhead() async {
+    if (formKey.currentState!.validate()) {
+      setState(() {
+        _isLoading = true;
+      });
+
+      await HelperFunctions.userUniversityName(university);
+      await HelperFunctions.userCityName(city);
+      await HelperFunctions.userBranchName(branch);
+      await HelperFunctions.userCurrentSem(semesters);
+      nextScreenReplace(context, Homepage(userName: widget.userName));
+    }
   }
 }

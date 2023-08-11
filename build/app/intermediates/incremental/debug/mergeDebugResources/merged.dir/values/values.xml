@@ -124,16 +124,16 @@
     <string name="common_signin_button_text">Sign in</string>
     <string name="common_signin_button_text_long">Sign in with Google</string>
     <string name="copy_toast_msg">Link copied to clipboard</string>
-    <string name="default_web_client_id" translatable="false">553993217496-21t4tueoe89i4dvusshba7alb02vq3rk.apps.googleusercontent.com</string>
+    <string name="default_web_client_id" translatable="false">823503710273-4plmljpr9e3srr3hpk0todvm1c5guus0.apps.googleusercontent.com</string>
     <string name="fallback_menu_item_copy_link">Copy link</string>
     <string name="fallback_menu_item_open_in_browser">Open in browser</string>
     <string name="fallback_menu_item_share_link">Share link</string>
-    <string name="gcm_defaultSenderId" translatable="false">553993217496</string>
-    <string name="google_api_key" translatable="false">AIzaSyDa15QhVeFb7SW9SRDAioc2e9YOHxp5suc</string>
-    <string name="google_app_id" translatable="false">1:553993217496:android:34348df0ec60c87c4fbead</string>
-    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDa15QhVeFb7SW9SRDAioc2e9YOHxp5suc</string>
-    <string name="google_storage_bucket" translatable="false">skill-ex-1fd48.appspot.com</string>
-    <string name="project_id" translatable="false">skill-ex-1fd48</string>
+    <string name="gcm_defaultSenderId" translatable="false">823503710273</string>
+    <string name="google_api_key" translatable="false">AIzaSyAR4lu2PT-c7PU5zZcl3Jyis41K-BJQEqc</string>
+    <string name="google_app_id" translatable="false">1:823503710273:android:a77a9c9947f30405f3bec0</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAR4lu2PT-c7PU5zZcl3Jyis41K-BJQEqc</string>
+    <string name="google_storage_bucket" translatable="false">skill-ex-fac7c.appspot.com</string>
+    <string name="project_id" translatable="false">skill-ex-fac7c</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <style name="LaunchTheme" parent="@android:style/Theme.Light.NoTitleBar">
         

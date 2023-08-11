@@ -2,7 +2,8 @@
 import 'package:flutter/material.dart';
 
 class WorkingProfileScreen extends StatefulWidget {
-  const WorkingProfileScreen({super.key});
+  String userName = '';
+  WorkingProfileScreen({super.key, required this.userName});
 
   @override
   _WorkingProfileScreenState createState() => _WorkingProfileScreenState();

@@ -6,6 +6,8 @@ import 'package:skillex/HOME!!/homepage.dart';
 import 'package:skillex/helper/firebase_auth.dart';
 import 'package:skillex/helper/helper_functions.dart';
 import 'package:skillex/screens/login_screen.dart';
+import 'package:skillex/screens/student_profile_screen.dart';
+import 'package:skillex/screens/working_profile_screen.dart';
 import 'package:skillex/widgets/widgets.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -23,7 +25,9 @@ class _RegisterPageState extends State<RegisterPage> {
   String fullName = "";
   String age = '';
   String phoneNumber = '';
+  String dropDownDefault = 'Student';
   AuthService authService = AuthService();
+  List<String> roles = ['Student', 'Working'];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -163,8 +167,38 @@ class _RegisterPageState extends State<RegisterPage> {
                             });
                           },
                         ),
-
- 
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        DropdownButtonFormField<String>(
+                          decoration: textInputDecoration.copyWith(
+                            labelText: 'Select Role',
+                            prefixIcon: const Icon(
+                              Icons.account_box,
+                              color: Colors.black,
+                            ),
+                          ),
+                          value: dropDownDefault,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              dropDownDefault = newValue!;
+                            });
+                          },
+                          items: roles.map<DropdownMenuItem<String>>(
+                            (String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            },
+                          ).toList(),
+                          validator: (val) {
+                            if (val == null || val.isEmpty) {
+                              return "Please select a role";
+                            }
+                            return null;
+                          },
+                        ),
                         const SizedBox(
                           height: 20,
                         ),
@@ -201,8 +235,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                     decoration: TextDecoration.underline),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    nextScreenReplace(
-                                        context, const LoginPage());
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => const LoginPage()));
+                                    Navigator.pop(context);
                                   }),
                           ],
                         )),
@@ -228,7 +265,20 @@ class _RegisterPageState extends State<RegisterPage> {
           await HelperFunctions.saveUserNameSF(fullName);
           await HelperFunctions.saveUserAgeSF(age);
           await HelperFunctions.saveUserPhoneSF(phoneNumber);
-          nextScreenReplace(context, Homepage(userName: fullName,));
+          await HelperFunctions.userStudentorWorking(dropDownDefault);
+          if (dropDownDefault == 'Student') {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => StudentProfileScreen(userName: fullName),
+              ),
+            );
+          } else {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => WorkingProfileScreen(userName: fullName)));
+          }
         } else {
           showSnackbar(context, Colors.red, value);
           setState(() {
