@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_multiselect/flutter_multiselect.dart';
+//import 'package:flutter_multiselect/flutter_multiselect.dart';
 import 'package:skillex/HOME!!/homepage.dart';
 
 // for authentication, validation of entered fields
@@ -77,7 +77,6 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
                           }
                         },
                       ),
-
                       const SizedBox(
                         height: 15,
                       ),

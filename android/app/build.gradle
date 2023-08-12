@@ -44,7 +44,7 @@ allprojects {
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
-apply plugin: 'com.google.gms.google-services'
+
 
 android {
     compileSdkVersion 33 // Update with your desired compile SDK version
@@ -105,5 +105,7 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.google.firebase:firebase-analytics'
 }
+
+apply plugin: 'com.google.gms.google-services'  // Add this line at the end
 
 
