@@ -106,4 +106,4 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
 }
 
-apply plugin: 'com.google.gms.google-services'  // Add this line at the end
+
