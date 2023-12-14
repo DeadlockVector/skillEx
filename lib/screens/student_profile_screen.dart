@@ -13,7 +13,7 @@ class StudentProfileScreen extends StatefulWidget {
   StudentProfileScreen({Key? key, required this.userName}) : super(key: key);
 
   @override
-  _StudentProfileScreenState createState() => _StudentProfileScreenState();
+  State<StudentProfileScreen> createState() => _StudentProfileScreenState();
 }
 
 class _StudentProfileScreenState extends State<StudentProfileScreen> {
@@ -23,6 +23,7 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
   String city = '';
   String branch = '';
   String semesters = '';
+  AuthService authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +51,7 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
                         height: 20,
                       ),
                       Text(
-                        "Welcome, " + widget.userName,
+                        "Welcome, ${widget.userName}",
                         style: const TextStyle(
                             fontSize: 40, fontWeight: FontWeight.bold),
                       ),
@@ -73,7 +74,7 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
                           if (val!.isNotEmpty) {
                             return null;
                           } else {
-                            return 'Please enter your Location';
+                            return 'Please enter your Location!';
                           }
                         },
                       ),
@@ -172,17 +173,34 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
           );
   }
 
+  // there's an error with homescreen popping up
+  // after user registers > after secondary info page
+  // black screen
+  // also doesn't stay logged in after signing in
+
   goAhead() async {
     if (formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
       });
 
+      await authService.addUserSecondaryInfoStudent(university, city, branch, semesters);
+
       await HelperFunctions.userUniversityName(university);
       await HelperFunctions.userCityName(city);
       await HelperFunctions.userBranchName(branch);
       await HelperFunctions.userCurrentSem(semesters);
+      
       nextScreenReplace(context, Homepage(userName: widget.userName));
+
+      /*
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: ((context) => Homepage(userName: widget.userName)
+        )
+      ));
+      */
     }
   }
 }

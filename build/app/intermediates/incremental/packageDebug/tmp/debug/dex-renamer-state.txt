@@ -1,7 +1,7 @@
-#Sat Aug 12 21:55:32 IST 2023
-base.0=C\:\\Users\\Aaditya Krishna\\Desktop\\skillEx\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
-base.1=C\:\\Users\\Aaditya Krishna\\Desktop\\skillEx\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes2.dex
-base.2=C\:\\Users\\Aaditya Krishna\\Desktop\\skillEx\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes3.dex
+#Tue Nov 14 15:25:46 IST 2023
+base.0=/home/isocyanate/androidDev/flutterProjects/skillEx/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+base.1=/home/isocyanate/androidDev/flutterProjects/skillEx/build/app/intermediates/dex/debug/mergeDexDebug/classes2.dex
+base.2=/home/isocyanate/androidDev/flutterProjects/skillEx/build/app/intermediates/dex/debug/mergeDexDebug/classes3.dex
 path.0=classes.dex
 path.1=classes2.dex
 path.2=classes3.dex

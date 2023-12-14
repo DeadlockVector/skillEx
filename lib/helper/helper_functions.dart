@@ -12,11 +12,19 @@ class HelperFunctions {
   static String userCity = "USERCITY";
   static String userBranch = "USERBRANCH";
   static String userSem = "USERSEM";
+  static String userOrganisation = "USERORGANISATION";
+  static String userDesignation = "USERDESIGNATION";
+  static String userExperience = "USEREXPERIENCE";
   // saving the data to SF
 
   static Future<bool> saveUserLoggedInStatus(bool isUserLoggedIn) async {
     SharedPreferences sf = await SharedPreferences.getInstance();
     return await sf.setBool(userLoggedInKey, isUserLoggedIn);
+  }
+
+  static Future<bool> isLoggedIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(userLoggedInKey) ?? false;
   }
 
   static Future<bool> saveUserNameSF(String userName) async {
@@ -62,6 +70,21 @@ class HelperFunctions {
   static Future<bool> userCurrentSem(String sem) async {
     SharedPreferences sf = await SharedPreferences.getInstance();
     return await sf.setString(userSem, sem);
+  }
+
+  static Future<bool> userOrganisationName(String org) async {
+    SharedPreferences sf = await SharedPreferences.getInstance();
+    return await sf.setString(userOrganisation, org);
+  }
+
+  static Future<bool> userDesignationName(String desig) async {
+    SharedPreferences sf = await SharedPreferences.getInstance();
+    return await sf.setString(userDesignation, desig);
+  }
+
+  static Future<bool> userExperienceYears(String exp) async {
+    SharedPreferences sf = await SharedPreferences.getInstance();
+    return await sf.setString(userExperience, exp);
   }
   // getting the data from SF
 

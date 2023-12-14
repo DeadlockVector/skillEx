@@ -2,9 +2,10 @@
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:skillex/HOME!!/homepage.dart';
+
 import 'package:skillex/helper/firebase_auth.dart';
 import 'package:skillex/helper/helper_functions.dart';
+
 import 'package:skillex/screens/login_screen.dart';
 import 'package:skillex/screens/student_profile_screen.dart';
 import 'package:skillex/screens/working_profile_screen.dart';
@@ -197,6 +198,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               return "Please select a role";
                             }
                             return null;
+                            
                           },
                         ),
                         const SizedBox(
@@ -256,7 +258,7 @@ class _RegisterPageState extends State<RegisterPage> {
         _isLoading = true;
       });
       await authService
-          .registerUserWithEmailandPassword(fullName, email, password)
+          .registerUserWithEmailandPassword(fullName, email, password, phoneNumber, dropDownDefault)
           .then((value) async {
         if (value == true) {
           // saving the shared preference state
@@ -266,6 +268,7 @@ class _RegisterPageState extends State<RegisterPage> {
           await HelperFunctions.saveUserAgeSF(age);
           await HelperFunctions.saveUserPhoneSF(phoneNumber);
           await HelperFunctions.userStudentorWorking(dropDownDefault);
+          
           if (dropDownDefault == 'Student') {
             Navigator.pushReplacement(
               context,

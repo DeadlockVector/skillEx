@@ -13,7 +13,7 @@ class AuthService {
               email: email, password: password))
           .user!;
 
-      if (user != null) {
+      if (user !=  null) {
         return true;
       }
     } on FirebaseAuthException catch (e) {
@@ -23,21 +23,75 @@ class AuthService {
 
   // register
   Future registerUserWithEmailandPassword(
-      String fullName, String email, String password) async {
+      String fullName, String email, String password, String phoneNumber, String studentOrWorking) async {
     try {
       User user = (await firebaseAuth.createUserWithEmailAndPassword(
               email: email, password: password))
           .user!;
 
-      if (user != null) {
+      if (user !=  null) {
         // call our database service to update the user data.
-        await DatabaseService(uid: user.uid).savingUserData(fullName, email);
+        // user id being initialised here in line 28
+        // figure out a way to pass it into the storing secondary info function in database services
+        await DatabaseService(uid: user.uid).savingUserPrimaryData(fullName, email, phoneNumber, studentOrWorking);
         return true;
       }
     } on FirebaseAuthException catch (e) {
       return e.message;
     }
   }
+
+  // secondary data after registering
+  Future addUserSecondaryInfoStudent(
+      String university, String location, String branch, String semester) async {
+    try {
+      User? user = firebaseAuth.currentUser;
+      if (user != null) {
+        // Get the user's UID
+        String uid = user.uid;
+
+        // updating secondary info
+        // calling function from DatabaseService
+        await DatabaseService(uid: uid).savingUserSecondaryDataStudent(
+          university,
+          location,
+          branch,
+          semester
+        );
+
+        return true;
+      } else {
+        return "User not logged in";
+      }
+    } catch (e) {
+      return e.toString();
+    }
+  }
+
+  Future addUserSecondaryInfoWorking(
+    String organisation, String city, String designation, String experience) async {
+      try {
+        User? user = firebaseAuth.currentUser;
+        if (user != null) {
+          String uid = user.uid;
+
+          await DatabaseService(uid: uid).savingUserSecondaryDataWorking(
+            organisation,
+            city,
+            designation,
+            experience
+          );
+
+          return true;
+        } else {
+          return "User not logged in";
+        }
+
+      } catch (e) {
+        return e.toString();
+      }
+    }
+  
 
   // signout
   Future signOut() async {
@@ -51,98 +105,3 @@ class AuthService {
     }
   }
 }
-
-
-// class FirebaseAuthHelper {
-//   // function to add user details
-//   static Future addUserDetails(String name, String email, String lifePhase,
-//       int age, int phoneNumber) async {
-//     await FirebaseFirestore.instance.collection('users').add({
-//       'name': name,
-//       'email': email,
-//       'lifePhase': lifePhase,
-//       'age': age,
-//       'phoneNumber': phoneNumber,
-//     });
-//   }
-
-//   static Future<User?> registerUsingEmailPassword(
-//       {required String email,
-//       required String password,
-//       required String name,
-//       required String lifePhase,
-//       required int age,
-//       required int phoneNumber}) async {
-//     FirebaseAuth auth = FirebaseAuth.instance;
-//     User? user;
-
-//     // this just aunthenticates the user
-//     // creating the user basically with an email and password
-//     try {
-//       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
-//         email: email,
-//         password: password,
-//       );
-
-//       user = userCredential.user;
-//       await user!.reload();
-//       user = auth.currentUser;
-
-//       // gotta add user details to database now
-//       // after authentication
-//       addUserDetails(name, email, lifePhase.toLowerCase(), age, phoneNumber);
-//     } on FirebaseAuthException catch (e) {
-//       if (e.code == 'weak-password') {
-//         print('The password provided is too weak.');
-//       } else if (e.code == 'email-already-in-use') {
-//         print('The account already exists for that email.');
-//       }
-//     } catch (e) {
-//       print(e);
-//     }
-
-//     return user;
-//   }
-
-//   static Future<User?> signInUsingEmailPassword({
-//     required String email,
-//     required String password,
-//   }) async {
-//     FirebaseAuth auth = FirebaseAuth.instance;
-//     User? user;
-
-//     try {
-//       UserCredential userCredential = await auth.signInWithEmailAndPassword(
-//         email: email,
-//         password: password,
-//       );
-//       user = userCredential.user;
-//     } on FirebaseAuthException catch (e) {
-//       if (e.code == 'user-not-found') {
-//         print('No user found for that email.');
-//       } else if (e.code == 'wrong-password') {
-//         print('Wrong password provided.');
-//       }
-//     }
-
-//     return user;
-//   }
-// }
-
-
-// Future registerUserWithEmailandPassword(
-//       String fullName, String email, String password) async {
-//     try {
-//       User user = (await FirebaseAuth.createUserWithEmailAndPassword(
-//               email: email, password: password))
-//           .user!;
-
-//       if (user != null) {
-//         // call our database service to update the user data.
-//         await DatabaseService(uid: user.uid).savingUserData(fullName, email);
-//         return true;
-//       }
-//     } on FirebaseAuthException catch (e) {
-//       return e.message;
-//     }
-//   }

@@ -1,136 +1,210 @@
 // use chool sharp icon
 import 'package:flutter/material.dart';
+import 'package:skillex/widgets/widgets.dart';
+
+import 'package:skillex/helper/firebase_auth.dart';
+import 'package:skillex/helper/helper_functions.dart';
+
+import 'package:skillex/HOME!!/homepage.dart';
 
 class WorkingProfileScreen extends StatefulWidget {
   String userName = '';
-  WorkingProfileScreen({super.key, required this.userName});
+  WorkingProfileScreen({Key? key, required this.userName}) : super(key: key);
 
   @override
-  _WorkingProfileScreenState createState() => _WorkingProfileScreenState();
+  State<WorkingProfileScreen> createState() => _WorkingProfileScreenState();
 }
 
 class _WorkingProfileScreenState extends State<WorkingProfileScreen> {
-  final _registerFormKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
+  bool _isLoading = false;
 
+  String organisation = '';
+  String city = '';
+  String designation = '';
+  String experience = '';
   // add profile links (github, insta, etc?)
   // add skills
-  final _organisationTextController = TextEditingController();
-  final _locationTextController = TextEditingController();
-  final _designationTextController = TextEditingController();
-  final _experienceTextController = TextEditingController();
 
-  final _focusOrganisation = FocusNode();
-  final _focusLocation = FocusNode();
-  final _focusDesignation = FocusNode();
-  final _focusExperience = FocusNode();
-
-  //bool _isProcession = false;
+  AuthService authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        _focusOrganisation.unfocus();
-        _focusLocation.unfocus();
-        _focusDesignation.unfocus();
-        _focusExperience.unfocus();
-      },
-      child: Scaffold(
+    return _isLoading 
+        ? const Center (
+          child: CircularProgressIndicator(color: Colors.black,),
+        )
+      : Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.black,
-            title: const Text('Profile Information'),
+            title: const Text('Professional Details'),
           ),
-          body: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Form(
-                      key: _registerFormKey,
-                      child: Column(
-                        children: <Widget>[
-                          const Icon(Icons.laptop_chromebook_rounded,
-                              size: 175),
-                          const SizedBox(height: 24.0),
-                          TextFormField(
-                            controller: _organisationTextController,
-                            focusNode: _focusOrganisation,
-                            decoration: InputDecoration(
-                              icon: const Icon(
-                                Icons.logo_dev_rounded,
-                                color: Colors.black,
-                              ),
-                              hintText: "Organisation",
-                              errorBorder: UnderlineInputBorder(
-                                borderRadius: BorderRadius.circular(6.0),
-                                borderSide: const BorderSide(
-                                  color: Color.fromARGB(255, 0, 0, 0),
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 12.0),
-                          TextFormField(
-                            controller: _locationTextController,
-                            focusNode: _focusLocation,
-                            decoration: InputDecoration(
-                              icon: const Icon(
-                                Icons.map_rounded,
-                                color: Colors.black,
-                              ),
-                              hintText: "City",
-                              errorBorder: UnderlineInputBorder(
-                                borderRadius: BorderRadius.circular(6.0),
-                                borderSide: const BorderSide(
-                                  color: Color.fromARGB(255, 0, 0, 0),
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 12.0),
-                          TextFormField(
-                            controller: _designationTextController,
-                            focusNode: _focusDesignation,
-                            decoration: InputDecoration(
-                              icon: const Icon(
-                                Icons.book_online_rounded,
-                                color: Colors.black,
-                              ),
-                              hintText: "Designation",
-                              errorBorder: UnderlineInputBorder(
-                                borderRadius: BorderRadius.circular(6.0),
-                                borderSide: const BorderSide(
-                                  color: Color.fromARGB(255, 0, 0, 0),
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 12.0),
-                          TextFormField(
-                            controller: _experienceTextController,
-                            focusNode: _focusExperience,
-                            decoration: InputDecoration(
-                              icon: const Icon(
-                                Icons.bookmark_add,
-                                color: Colors.black,
-                              ),
-                              hintText: "Years of Experience",
-                              errorBorder: UnderlineInputBorder(
-                                borderRadius: BorderRadius.circular(6.0),
-                                borderSide: const BorderSide(
-                                  color: Color.fromARGB(255, 0, 0, 0),
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 60.0),
-                        ],
+          body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+
+                    children: <Widget>[
+                      Icon(Icons.access_alarm),
+                      const SizedBox(
+                        height: 20,
                       ),
-                    ),
-                  ],
+                      Text(
+                        "Welcome, ${widget.userName}",
+                        style: const TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        decoration: textInputDecoration.copyWith(
+                            labelText: 'Organisation',
+                            prefixIcon: const Icon(
+                              Icons.laptop,
+                              color: Colors.black,
+                            )),
+                        onChanged: (val) {
+                          setState(() {
+                            organisation = val;
+                          });
+                        },
+                        validator: (val) {
+                          if (val!.isNotEmpty) {
+                            return null;
+                          } else {
+                            return 'Please enter your University!';
+                          }
+                        },
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      TextFormField(
+                        decoration: textInputDecoration.copyWith(
+                            labelText: 'City',
+                            prefixIcon: const Icon(
+                              Icons.location_city_outlined,
+                              color: Colors.black,
+                            )),
+                        onChanged: (val) {
+                          setState(() {
+                            city = val;
+                          });
+                        },
+                        validator: (val) {
+                          if (val!.isNotEmpty) {
+                            return null;
+                          } else {
+                            return 'Please enter your Location';
+                          }
+                        },
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      TextFormField(
+                        decoration: textInputDecoration.copyWith(
+                            labelText: 'Desgination @Organisation',
+                            prefixIcon: const Icon(
+                              Icons.assignment_ind_outlined,
+                              color: Colors.black,
+                            )),
+                        onChanged: (val) {
+                          setState(() {
+                            designation = val;
+                          });
+                        },
+                        validator: (val) {
+                          if (val!.isNotEmpty) {
+                            return null;
+                          } else {
+                            return 'Please enter your designation';
+                          }
+                        },
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      TextFormField(
+                        decoration: textInputDecoration.copyWith(
+                            labelText: 'Years of Experience',
+                            prefixIcon: const Icon(
+                              Icons.schedule_outlined,
+                              color: Colors.black,
+                            )),
+                        onChanged: (val) {
+                          setState(() {
+                            experience = val;
+                          });
+                        },
+                        validator: (val) {
+                          if (val!.isNotEmpty) {
+                            return null;
+                          } else {
+                            return 'Enter your years of experience';
+                          }
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.black,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30))),
+                          child: const Text(
+                            "Submit",
+                            style: TextStyle(color: Colors.white, fontSize: 16),
+                          ),
+                          onPressed: () {
+                            goAhead();
+                          },
+                        ),
+                      ),
+                    ]
+                  ),
                 ),
-              ))),
-    );
+              ),
+            )
+          );
+  }
+
+
+// define the authservide in firebase_auth.dart for working professionals
+goAhead() async {
+    if (formKey.currentState!.validate()) {
+      setState(() {
+        _isLoading = true;
+      });
+
+      await authService.addUserSecondaryInfoWorking(organisation, city, designation, experience);
+
+      await HelperFunctions.userOrganisationName(organisation);
+      await HelperFunctions.userCityName(city);
+      await HelperFunctions.userDesignationName(designation);
+      await HelperFunctions.userExperienceYears(experience);
+      
+      nextScreenReplace(context, Homepage(userName: widget.userName));
+      
+      /*
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: ((context) => Homepage(userName: widget.userName)
+        )
+      ));
+      */
+    }
   }
 }

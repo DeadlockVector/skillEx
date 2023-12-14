@@ -10,14 +10,36 @@ class DatabaseService {
   final CollectionReference groupCollection =
       FirebaseFirestore.instance.collection("groups");
 
-  // saving the userdata
-  Future savingUserData(String fullName, String email) async {
+  // saving the primary userdata
+  Future savingUserPrimaryData(String fullName, String email, String phoneNumber, String studentOrWorking) async {
     return await userCollection.doc(uid).set({
       "fullName": fullName,
       "email": email,
+      "phoneNumber": phoneNumber,
+      "studentOrWorking": studentOrWorking,
       "groups": [],
       "profilePic": "",
       "uid": uid,
+    });
+  }
+
+  // function to save the user secondary data for student
+  // just created the function, figure out where to call it
+  Future savingUserSecondaryDataStudent(String university, String city, String branch, String semester) async {
+    return await userCollection.doc(uid).update({
+      "university": university,
+      "city": city,
+      "branch": branch,
+      "semster": semester
+    });
+  }
+  
+  Future savingUserSecondaryDataWorking(String organisation, String city, String designation, String experience) async {
+    return await userCollection.doc(uid).update({
+      "organisation": organisation,
+      "city": city,
+      "designation": designation,
+      "experience": experience
     });
   }
 
@@ -28,6 +50,8 @@ class DatabaseService {
     return snapshot;
   }
 
+  // don't need groups atm so commenting all this out
+  /*
   // get user groups
   getUserGroups() async {
     return userCollection.doc(uid).snapshots();
@@ -56,8 +80,9 @@ class DatabaseService {
           FieldValue.arrayUnion(["${groupDocumentReference.id}_$groupName"])
     });
   }
-
+  
   // getting the chats
+  
   getChats(String groupId) async {
     return groupCollection
         .doc(groupId)
@@ -133,4 +158,5 @@ class DatabaseService {
       "recentMessageTime": chatMessageData['time'].toString(),
     });
   }
+  */  
 }

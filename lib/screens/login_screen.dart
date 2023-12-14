@@ -1,224 +1,3 @@
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:firebase_core/firebase_core.dart';
-// import 'package:flutter/material.dart';
-// import 'package:skillex/HOME!!/homepage.dart';
-// import 'package:skillex/screens/signup_screen.dart';
-
-// import '../helper/firebase_auth.dart';
-// import '../helper/validator.dart';
-
-// class LoginScreen extends StatefulWidget {
-//   const LoginScreen({super.key});
-
-//   @override
-//   _LoginScreenState createState() => _LoginScreenState();
-// }
-
-// class _LoginScreenState extends State<LoginScreen> {
-//   final _formKey = GlobalKey<FormState>();
-
-//   final _emailTextController = TextEditingController();
-//   final _passwordTextController = TextEditingController();
-
-//   final _focusEmail = FocusNode();
-//   final _focusPassword = FocusNode();
-
-//   bool _isProcessing = false;
-
-//   Future<FirebaseApp> _initializeFirebase() async {
-//     FirebaseApp firebaseApp = await Firebase.initializeApp();
-
-//     User? user = FirebaseAuth.instance.currentUser;
-
-//     if (user != null) {
-//       Navigator.of(context).pushReplacement(
-//         MaterialPageRoute(
-//           builder: (context) => HomeScreen(
-//             user: user,
-//           ),
-//         ),
-//       );
-//     }
-
-//     return firebaseApp;
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       onTap: () {
-//         _focusEmail.unfocus();
-//         _focusPassword.unfocus();
-//       },
-//       child: Scaffold(
-//         appBar: AppBar(
-//           backgroundColor: const Color.fromARGB(255, 0, 0, 0),
-//           title: const Text('Skill-Ex'),
-//         ),
-//         body: SingleChildScrollView(
-//           child: FutureBuilder(
-//             future: _initializeFirebase(),
-//             builder: (context, snapshot) {
-//               if (snapshot.connectionState == ConnectionState.done) {
-//                 return Padding(
-//                   padding:
-//                       const EdgeInsets.only(left: 24.0, right: 24.0, top: 48),
-//                   child: Column(
-//                     mainAxisAlignment: MainAxisAlignment.start,
-//                     children: [
-//                       const Icon(Icons.lock, size: 100),
-//                       const Padding(
-//                         padding: EdgeInsets.only(bottom: 75.0, top: 42),
-//                         child: Text('Locked!',
-//                             style: TextStyle(
-//                               color: Colors.black,
-//                               fontSize: 40,
-//                             )),
-//                       ),
-//                       Form(
-//                         key: _formKey,
-//                         child: Column(
-//                           children: <Widget>[
-//                             TextFormField(
-//                               controller: _emailTextController,
-//                               focusNode: _focusEmail,
-//                               validator: (value) => Validator.validateEmail(
-//                                 email: value,
-//                               ),
-//                               decoration: InputDecoration(
-//                                 icon: const Icon(
-//                                   Icons.email_rounded,
-//                                   color: Colors.black,
-//                                 ),
-//                                 hintText: "Email",
-//                                 errorBorder: UnderlineInputBorder(
-//                                   borderRadius: BorderRadius.circular(6.0),
-//                                   borderSide: const BorderSide(
-//                                     color: Color.fromARGB(255, 0, 0, 0),
-//                                   ),
-//                                 ),
-//                               ),
-//                             ),
-//                             const SizedBox(height: 8.0),
-//                             TextFormField(
-//                               controller: _passwordTextController,
-//                               focusNode: _focusPassword,
-//                               obscureText: true,
-//                               validator: (value) => Validator.validatePassword(
-//                                 password: value,
-//                               ),
-//                               decoration: InputDecoration(
-//                                 icon: const Icon(
-//                                   Icons.remove_red_eye_rounded,
-//                                   color: Colors.black,
-//                                 ),
-//                                 hintText: "Password",
-//                                 errorBorder: UnderlineInputBorder(
-//                                   borderRadius: BorderRadius.circular(6.0),
-//                                   borderSide: const BorderSide(
-//                                     color: Color.fromARGB(255, 0, 0, 0),
-//                                   ),
-//                                 ),
-//                               ),
-//                             ),
-//                             const SizedBox(height: 144.0),
-//                             _isProcessing
-//                                 ? const CircularProgressIndicator()
-//                                 : Row(
-//                                     mainAxisAlignment:
-//                                         MainAxisAlignment.spaceBetween,
-//                                     children: [
-//                                       Expanded(
-//                                         child: ElevatedButton(
-//                                           onPressed: () async {
-//                                             _focusEmail.unfocus();
-//                                             _focusPassword.unfocus();
-
-//                                             if (_formKey.currentState!
-//                                                 .validate()) {
-//                                               setState(() {
-//                                                 _isProcessing = true;
-//                                               });
-
-//                                               User? user =
-//                                                   await FirebaseAuthHelper
-//                                                       .signInUsingEmailPassword(
-//                                                 email: _emailTextController.text,
-//                                                 password:
-//                                                     _passwordTextController.text,
-//                                               );
-
-//                                               setState(() {
-//                                                 _isProcessing = false;
-//                                               });
-
-//                                               if (user != null) {
-//                                                 Navigator.of(context)
-//                                                     .pushReplacement(
-//                                                   MaterialPageRoute(
-//                                                     builder: (context) =>
-//                                                         HomeScreen(user: user),
-//                                                   ),
-//                                                 );
-//                                               }
-//                                             }
-//                                           },
-//                                           style: ButtonStyle(
-//                                             backgroundColor:
-//                                                 MaterialStateProperty.all(
-//                                                     const Color.fromARGB(
-//                                                         255, 0, 0, 0)),
-//                                           ),
-//                                           child: const Text(
-//                                             'Sign In',
-//                                             style: TextStyle(color: Colors.white),
-//                                           ),
-//                                         ),
-//                                       ),
-//                                       const SizedBox(width: 24.0),
-//                                       Expanded(
-//                                         child: ElevatedButton(
-//                                           onPressed: () {
-//                                             Navigator.of(context).push(
-//                                               MaterialPageRoute(
-//                                                 builder: (context) =>
-//                                                     const SignUpScreen(),
-//                                               ),
-//                                             );
-//                                           },
-//                                           style: ButtonStyle(
-//                                             backgroundColor:
-//                                                 MaterialStateProperty.all(
-//                                                     const Color.fromARGB(
-//                                                         255, 0, 0, 0)),
-//                                           ),
-//                                           child: const Text(
-//                                             'SignUp',
-//                                             style: TextStyle(color: Colors.white),
-//                                           ),
-//                                         ),
-//                                       ),
-//                                     ],
-//                                   )
-//                           ],
-//                         ),
-//                       )
-//                     ],
-//                   ),
-//                 );
-//               }
-
-//               return const Center(
-//                 child: CircularProgressIndicator(),
-//               );
-//             },
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
@@ -229,6 +8,8 @@ import 'package:skillex/helper/firebase_auth.dart';
 import 'package:skillex/helper/helper_functions.dart';
 import 'package:skillex/screens/signup_screen.dart';
 import 'package:skillex/widgets/widgets.dart';
+
+import 'package:get/get.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -365,6 +146,46 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   login() async {
+  if (formKey.currentState!.validate()) {
+    setState(() {
+      _isLoading = true;
+    });
+
+    await authService.loginWithUserNameandPassword(email, password).then(
+      (value) async {
+        if (value == true) {
+          QuerySnapshot snapshot = await DatabaseService(
+            uid: FirebaseAuth.instance.currentUser!.uid,
+          ).gettingUserData(email);
+
+          // saving the values to our shared preferences
+          await HelperFunctions.saveUserLoggedInStatus(true);
+          await HelperFunctions.saveUserEmailSF(email);
+          await HelperFunctions.saveUserNameSF(snapshot.docs[0]['fullName']);
+
+          String userName = '';
+          await HelperFunctions.getUserNameFromSF().then((val) {
+            setState(() {
+              userName = val!;
+            });
+          });
+
+          // Use Get.to instead of Navigator
+          Get.off(
+            () => Homepage(userName: userName,),
+          );
+        } else {
+            showSnackbar(context, Colors.red, value);
+            setState(() {
+              _isLoading = false;
+            });
+          }
+        },
+      );
+    }
+  }
+  /*
+  login() async {
     if (formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
@@ -401,4 +222,6 @@ class _LoginPageState extends State<LoginPage> {
       });
     }
   }
+  */
+
 }

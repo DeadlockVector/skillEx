@@ -255,16 +255,5 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-/*
-import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 
-import 'package:skillex/widgets/largeText.dart';
-import 'package:skillex/widgets/smallText.dart';
-
-import 'package:skillex/screens/login_screen.dart';
-import 'package:skillex/helper/firebase_auth.dart';
-import 'package:skillex/HOME!!/skillDisplay.dart';
-*/
 
